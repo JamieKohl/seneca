@@ -15,7 +15,7 @@ import {
   Bell,
   TrendingUp,
   Home,
-  CreditCard,
+  Eye,
   Crown,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -25,6 +25,7 @@ const navItems = [
   { href: "/", label: "Home", icon: Home },
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/portfolio", label: "My Positions", icon: Briefcase },
+  { href: "/watchlist", label: "Watchlist", icon: Eye },
   { href: "/signals", label: "AI Signals", icon: Signal },
   { href: "/alerts", label: "Alert History", icon: Bell },
   { href: "/performance", label: "Performance", icon: TrendingUp },

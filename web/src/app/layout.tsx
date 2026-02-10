@@ -9,11 +9,41 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "KohlCorp - AI-Powered Stock Predictions & Alerts",
+  title: {
+    default: "KohlCorp - AI-Powered Stock Predictions & Alerts",
+    template: "%s | KohlCorp",
+  },
   description:
-    "Get AI-powered buy, sell, and hold alerts with profit estimates. Real-time stock market predictions and news-driven insights.",
+    "Get AI-powered buy, sell, and hold alerts with profit estimates. Real-time stock market predictions and news-driven insights. Never miss a trade again.",
   manifest: "/manifest.json",
   themeColor: "#10b981",
+  keywords: [
+    "stock alerts",
+    "AI trading",
+    "buy sell hold",
+    "stock predictions",
+    "market alerts",
+    "broker companion",
+    "Robinhood alerts",
+    "stock signals",
+  ],
+  openGraph: {
+    type: "website",
+    title: "KohlCorp - AI-Powered Stock Predictions & Alerts",
+    description:
+      "Get AI-powered buy, sell, and hold alerts. We tell you exactly when to open your broker and act.",
+    siteName: "KohlCorp",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "KohlCorp - AI-Powered Stock Alerts",
+    description:
+      "Get AI-powered buy, sell, and hold alerts with profit estimates.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
