@@ -25,6 +25,7 @@ import {
 } from "@/lib/utils";
 import { usePortfolio } from "@/hooks/usePortfolio";
 import { useStockQuote } from "@/hooks/useStockQuote";
+import { toast } from "@/components/ui/toast";
 
 function HoldingRow({
   holding,
@@ -144,12 +145,15 @@ export default function PortfolioPage() {
         }),
       });
       if (res.ok) {
+        toast.success(`${formData.symbol.toUpperCase()} added to your positions`);
         setFormData({ symbol: "", quantity: "", avgCost: "", date: "", broker: "Robinhood" });
         setShowAddForm(false);
         mutate();
+      } else {
+        toast.error("Failed to add position. Try again.");
       }
     } catch {
-      // ignore
+      toast.error("Failed to add position. Check your connection.");
     } finally {
       setSubmitting(false);
     }
@@ -158,9 +162,10 @@ export default function PortfolioPage() {
   const handleDelete = async (id: string) => {
     try {
       await fetch(`/api/portfolio?id=${id}`, { method: "DELETE" });
+      toast.success("Position removed");
       mutate();
     } catch {
-      // ignore
+      toast.error("Failed to remove position");
     }
   };
 

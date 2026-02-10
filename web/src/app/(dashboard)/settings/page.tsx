@@ -37,8 +37,10 @@ export default function SettingsPage() {
   });
   const [alertPref, setAlertPref] = useState("watchlistOnly");
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setSaved(true);
+    const { toast } = await import("@/components/ui/toast");
+    toast.success("Settings saved successfully");
     setTimeout(() => setSaved(false), 2000);
   };
 

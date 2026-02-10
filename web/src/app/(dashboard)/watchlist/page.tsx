@@ -15,6 +15,7 @@ import Link from "next/link";
 import { cn, formatCurrency, formatPercent, getChangeColor } from "@/lib/utils";
 import { useStore } from "@/lib/store";
 import { useStockQuote } from "@/hooks/useStockQuote";
+import { toast } from "@/components/ui/toast";
 
 const POPULAR_STOCKS = [
   "NVDA",
@@ -132,6 +133,7 @@ export default function WatchlistPage() {
     const upper = symbol.trim().toUpperCase();
     if (upper && !watchlist.includes(upper)) {
       addToWatchlist(upper);
+      toast.success(`${upper} added to watchlist`);
     }
     setAddInput("");
     setShowAdd(false);
@@ -257,7 +259,10 @@ export default function WatchlistPage() {
               key={symbol}
               symbol={symbol}
               onSelect={(s) => setSelectedSymbol(s)}
-              onRemove={removeFromWatchlist}
+              onRemove={(s) => {
+                removeFromWatchlist(s);
+                toast.info(`${s} removed from watchlist`);
+              }}
             />
           ))}
         </div>
