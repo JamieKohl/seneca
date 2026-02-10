@@ -112,9 +112,9 @@ export default function PortfolioPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Portfolio</h1>
+          <h1 className="text-2xl font-bold text-white">My Positions</h1>
           <p className="text-sm text-zinc-400">
-            Track your holdings and performance
+            Log what you own on your broker — we&apos;ll track live prices and alert you when to act
           </p>
         </div>
         <button
@@ -122,7 +122,7 @@ export default function PortfolioPage() {
           className="flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700 transition-colors"
         >
           <Plus className="h-4 w-4" />
-          Add Holding
+          Add Position
         </button>
       </div>
 
@@ -130,7 +130,7 @@ export default function PortfolioPage() {
       {showAddForm && (
         <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-6">
           <h3 className="mb-4 text-lg font-semibold text-white">
-            Add New Holding
+            Add a Position from Your Broker
           </h3>
           <form onSubmit={handleAddHolding} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             <div>

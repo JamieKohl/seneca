@@ -9,13 +9,13 @@ export function HeroSection() {
           {/* Left: Headline */}
           <div className="flex flex-col justify-center py-12 lg:py-0">
             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Know When to{" "}
-              <span className="text-emerald-500">Buy, Sell, or Hold</span>
+              Your AI Copilot for{" "}
+              <span className="text-emerald-500">Robinhood & Beyond</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg text-zinc-400">
-              AI-powered alerts that tell you exactly when to act. Get real-time
-              buy/sell signals, news-driven insights, and profit estimates
-              — before the market moves.
+              We watch the market 24/7 so you don&apos;t have to. Log your positions,
+              and we&apos;ll tell you exactly when to open your broker and buy, sell,
+              or hold — with profit estimates and news-driven reasoning.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link

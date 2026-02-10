@@ -1,14 +1,14 @@
 "use client";
 
 const alerts = [
-  { symbol: "AAPL", action: "BUY", est: "+8.2%", reason: "Strong earnings beat" },
-  { symbol: "TSLA", action: "BUY", est: "+14.5%", reason: "New product launch incoming" },
-  { symbol: "MSFT", action: "HOLD", est: "+2.1%", reason: "Steady growth, wait for dip" },
-  { symbol: "NVDA", action: "BUY", est: "+11.3%", reason: "AI demand surge" },
-  { symbol: "AMZN", action: "SELL", est: "-4.7%", reason: "Overbought, take profits" },
-  { symbol: "GOOGL", action: "BUY", est: "+6.8%", reason: "Cloud revenue accelerating" },
-  { symbol: "META", action: "HOLD", est: "+1.9%", reason: "Mixed signals, stay put" },
-  { symbol: "JPM", action: "BUY", est: "+5.4%", reason: "Rate environment favorable" },
+  { symbol: "AAPL", action: "BUY", est: "+8.2%", reason: "Go buy on Robinhood — earnings beat" },
+  { symbol: "TSLA", action: "BUY", est: "+14.5%", reason: "New product launch — open your broker" },
+  { symbol: "MSFT", action: "HOLD", est: "+2.1%", reason: "Hold your position — wait for dip" },
+  { symbol: "NVDA", action: "BUY", est: "+11.3%", reason: "AI demand surging — buy now on Webull" },
+  { symbol: "AMZN", action: "SELL", est: "-4.7%", reason: "Go sell on Robinhood — take profits" },
+  { symbol: "GOOGL", action: "BUY", est: "+6.8%", reason: "Cloud revenue up — time to buy" },
+  { symbol: "META", action: "HOLD", est: "+1.9%", reason: "Mixed signals — keep your position" },
+  { symbol: "JPM", action: "BUY", est: "+5.4%", reason: "Rates favorable — open your broker" },
 ];
 
 const actionStyles: Record<string, string> = {

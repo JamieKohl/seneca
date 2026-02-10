@@ -36,7 +36,7 @@ const pastAlerts: PastAlert[] = [
     id: "1",
     symbol: "NVDA",
     action: "BUY",
-    reason: "AI chip demand surging, data center revenue up 150% YoY",
+    reason: "AI chip demand surging — we said go buy on your broker",
     confidence: 0.92,
     priceAtAlert: 680.0,
     currentPrice: 758.4,
@@ -49,7 +49,7 @@ const pastAlerts: PastAlert[] = [
     id: "2",
     symbol: "TSLA",
     action: "BUY",
-    reason: "New Robotaxi announcement expected, insider buying detected",
+    reason: "Robotaxi announcement — go buy TSLA on Robinhood",
     confidence: 0.85,
     priceAtAlert: 245.0,
     currentPrice: 278.8,
@@ -62,7 +62,7 @@ const pastAlerts: PastAlert[] = [
     id: "3",
     symbol: "AMZN",
     action: "SELL",
-    reason: "Overbought RSI, AWS growth slowing, profit-taking expected",
+    reason: "Overbought — go sell AMZN on your broker, take profits",
     confidence: 0.78,
     priceAtAlert: 198.0,
     currentPrice: 185.1,
@@ -75,7 +75,7 @@ const pastAlerts: PastAlert[] = [
     id: "4",
     symbol: "AAPL",
     action: "BUY",
-    reason: "iPhone 17 pre-orders exceeding expectations",
+    reason: "iPhone 17 pre-orders strong — go buy AAPL on your broker",
     confidence: 0.81,
     priceAtAlert: 232.0,
     currentPrice: 228.5,
@@ -172,7 +172,7 @@ export default function AlertHistoryPage() {
       <div>
         <h1 className="text-2xl font-bold text-white">Alert History</h1>
         <p className="text-sm text-zinc-400">
-          Track past alerts and see how our predictions performed
+          Every alert we sent to your broker — and whether it was right
         </p>
       </div>
 

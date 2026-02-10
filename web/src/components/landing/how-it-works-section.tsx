@@ -1,4 +1,4 @@
-import { UserPlus, ListPlus, Bell } from "lucide-react";
+import { UserPlus, Wallet, Bell } from "lucide-react";
 
 const steps = [
   {
@@ -6,21 +6,21 @@ const steps = [
     step: "01",
     title: "Create Your Account",
     description:
-      "Sign up in seconds. No credit card required. Get instant access to the platform.",
+      "Sign up in seconds. No credit card required. No money goes into this app.",
   },
   {
-    icon: ListPlus,
+    icon: Wallet,
     step: "02",
-    title: "Add Stocks to Watch",
+    title: "Log Your Positions",
     description:
-      "Build your watchlist with the stocks you care about. We'll start tracking them immediately.",
+      "Tell us what stocks you own on Robinhood, Webull, or any broker — and how much you put in.",
   },
   {
     icon: Bell,
     step: "03",
-    title: "Get Smart Alerts",
+    title: "Get Broker Alerts",
     description:
-      "Receive AI-powered buy, sell, and hold alerts with profit estimates — right when it matters.",
+      "We\u0027ll notify you: \"Go on Robinhood and sell TSLA now\" — with profit estimates and reasoning.",
   },
 ];
 

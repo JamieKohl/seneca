@@ -7,10 +7,10 @@ export function CTASection() {
         {/* CTA */}
         <div className="text-center">
           <h2 className="text-3xl font-bold text-white sm:text-4xl">
-            Never Miss a Market Move
+            Never Miss a Move on Your Broker
           </h2>
           <p className="mt-4 text-lg text-zinc-400">
-            Join thousands of users getting AI-powered buy, sell, and hold alerts in real time.
+            We watch. You trade. Get AI alerts that tell you exactly when to open Robinhood and act.
           </p>
           <div className="mt-8 flex justify-center gap-4">
             <Link

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Save, Key, Bell, Shield, Palette } from "lucide-react";
+import { Save, Key, Bell, Shield, Palette, ExternalLink } from "lucide-react";
 
 export default function SettingsPage() {
   const [finnhubKey, setFinnhubKey] = useState("");
@@ -20,6 +20,28 @@ export default function SettingsPage() {
         <p className="text-sm text-zinc-400">
           Configure your API keys and preferences
         </p>
+      </div>
+
+      {/* Broker */}
+      <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-6">
+        <div className="mb-4 flex items-center gap-2">
+          <ExternalLink className="h-5 w-5 text-emerald-500" />
+          <h3 className="text-lg font-semibold text-white">Your Broker</h3>
+        </div>
+        <p className="mb-4 text-sm text-zinc-400">
+          Select your broker so alerts say the right thing (e.g. &quot;Go sell on Robinhood&quot;).
+          We never connect to or access your broker account.
+        </p>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {["Robinhood", "Webull", "Fidelity", "Other"].map((broker) => (
+            <button
+              key={broker}
+              className="rounded-lg border border-zinc-700 px-4 py-2.5 text-sm font-medium text-zinc-300 hover:border-emerald-500 hover:text-white transition-colors focus:border-emerald-500 focus:bg-emerald-500/10 focus:text-emerald-400"
+            >
+              {broker}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* API Keys */}

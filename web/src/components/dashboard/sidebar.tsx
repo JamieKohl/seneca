@@ -21,7 +21,7 @@ import { useStore } from "@/lib/store";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/portfolio", label: "Portfolio", icon: Briefcase },
+  { href: "/portfolio", label: "My Positions", icon: Briefcase },
   { href: "/signals", label: "AI Signals", icon: Signal },
   { href: "/alerts", label: "Alert History", icon: Bell },
   { href: "/performance", label: "Performance", icon: TrendingUp },

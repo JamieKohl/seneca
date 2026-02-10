@@ -48,7 +48,7 @@ export default function LoginPage() {
             <span className="text-2xl font-bold text-white">Kohlmeyer Equity</span>
           </div>
           <p className="mt-2 text-sm text-zinc-400">
-            AI-powered daytrading insights
+            AI alerts for your broker — we watch, you trade
           </p>
         </div>
 

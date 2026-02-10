@@ -33,16 +33,16 @@ export default function DashboardPage() {
       <div>
         <h1 className="text-2xl font-bold text-white">Dashboard</h1>
         <p className="text-sm text-zinc-400">
-          AI-powered market insights and portfolio overview
+          Live market data and AI alerts for your broker positions
         </p>
       </div>
 
       {/* Stats Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <StatCard
-          title="Portfolio Cost Basis"
+          title="Positions Value"
           value={totalCost > 0 ? formatCurrency(totalCost) : "$0.00"}
-          description={holdingsList.length > 0 ? `${holdingsList.length} holdings` : "No holdings yet"}
+          description={holdingsList.length > 0 ? `${holdingsList.length} positions logged` : "No positions yet"}
           icon={DollarSign}
         />
         <StatCard

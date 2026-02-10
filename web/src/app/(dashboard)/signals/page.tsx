@@ -64,7 +64,7 @@ export default function SignalsPage() {
         <div>
           <h1 className="text-2xl font-bold text-white">AI Signals</h1>
           <p className="text-sm text-zinc-400">
-            AI-generated buy/sell/hold recommendations
+            AI tells you when to open your broker and act — buy, sell, or hold
           </p>
         </div>
         <button

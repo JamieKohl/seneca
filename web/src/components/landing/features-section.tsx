@@ -4,45 +4,45 @@ import {
   DollarSign,
   Newspaper,
   Brain,
-  Target,
+  Wallet,
 } from "lucide-react";
 
 const features = [
   {
     icon: Bell,
-    title: "Instant Buy/Sell Alerts",
+    title: "Broker Action Alerts",
     description:
-      "Get notified the moment our AI detects a buy, sell, or hold opportunity — like \"BUY NOW\" or \"SELL NOW\" pushed straight to your dashboard.",
+      "\"Go on Robinhood and sell TSLA now\" — we tell you exactly when to open your broker and what to do.",
+  },
+  {
+    icon: Wallet,
+    title: "Position Tracking",
+    description:
+      "Log what you own on Robinhood, Webull, or any broker. We track live prices and match your real positions.",
   },
   {
     icon: Newspaper,
-    title: "News-Driven Insights",
+    title: "News-Driven Alerts",
     description:
-      "\"Tesla just launched a new product — you should buy now.\" We scan breaking news and translate it into actionable alerts with context.",
+      "\"Tesla just launched a new product — go buy on Robinhood.\" We scan breaking news and tell you when to act.",
   },
   {
     icon: DollarSign,
     title: "Profit Estimates",
     description:
-      "Every alert comes with an estimated profit range so you know what you could make before you act.",
+      "Every alert shows how much you could make or lose based on your actual position size. No guessing.",
   },
   {
     icon: Brain,
     title: "AI Predictions",
     description:
-      "Machine learning models analyze patterns, sentiment, and fundamentals to predict where stocks are headed next.",
+      "Machine learning models analyze patterns, sentiment, and fundamentals to predict where your stocks are headed.",
   },
   {
     icon: TrendingUp,
-    title: "Market Tracking",
+    title: "Live Market Data",
     description:
-      "Real-time price tracking across major stocks and indices. Always know what the market is doing at a glance.",
-  },
-  {
-    icon: Target,
-    title: "Confidence Scores",
-    description:
-      "Every signal comes with a confidence score so you can weigh the strength of each prediction before deciding.",
+      "Real-time prices for every stock in your portfolio. Always know what your broker positions are worth.",
   },
 ];
 
@@ -52,10 +52,10 @@ export function FeaturesSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-white sm:text-4xl">
-            Your AI-Powered Market Copilot
+            Your AI Sidekick for Any Broker
           </h2>
           <p className="mt-4 text-lg text-zinc-400">
-            We watch the market so you don&apos;t have to. Get alerts, not noise.
+            We watch the market. You trade on Robinhood, Webull, or wherever you invest.
           </p>
         </div>
 
