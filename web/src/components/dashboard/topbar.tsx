@@ -7,6 +7,7 @@ import { useStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
 import { NotificationPanel } from "./notification-panel";
 import { UserMenu } from "./user-menu";
+import { useMarketStatus } from "@/hooks/useMarketStatus";
 
 export function Topbar() {
   const { sidebarOpen, setSelectedSymbol, notifications } = useStore();
@@ -15,6 +16,7 @@ export function Topbar() {
   const notifRef = useRef<HTMLDivElement>(null);
 
   const unreadCount = notifications.filter((n) => !n.read).length;
+  const marketStatus = useMarketStatus();
 
   // Close notification panel on outside click
   useEffect(() => {
@@ -61,9 +63,19 @@ export function Topbar() {
         {/* Right side */}
         <div className="flex items-center gap-2">
           {/* Market status pill */}
-          <div className="hidden sm:flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/50 px-3 py-1.5 text-xs">
-            <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-zinc-400">Market Open</span>
+          <div
+            className="hidden sm:flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/50 px-3 py-1.5 text-xs"
+            title={marketStatus.nextEvent}
+          >
+            <div
+              className={cn(
+                "h-2 w-2 rounded-full",
+                marketStatus.isOpen
+                  ? "bg-emerald-500 animate-pulse"
+                  : "bg-zinc-500"
+              )}
+            />
+            <span className="text-zinc-400">{marketStatus.label}</span>
           </div>
 
           {/* Quick generate */}

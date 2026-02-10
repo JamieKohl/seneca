@@ -6,5 +6,6 @@ export { StatsSection } from "./stats-section";
 export { SampleAlertSection } from "./sample-alert-section";
 export { HowItWorksSection } from "./how-it-works-section";
 export { FeaturesSection } from "./features-section";
+export { TestimonialsSection } from "./testimonials-section";
 export { PricingSection } from "./pricing-section";
 export { CTASection } from "./cta-section";
