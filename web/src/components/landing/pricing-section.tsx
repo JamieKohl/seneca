@@ -105,7 +105,7 @@ export function PricingSection() {
               </ul>
 
               <Link
-                href={plan.href}
+                href="/checkout"
                 className={`mt-8 block w-full rounded-lg py-2.5 text-center text-sm font-medium transition-colors ${
                   plan.highlighted
                     ? "bg-emerald-600 text-white hover:bg-emerald-700"
