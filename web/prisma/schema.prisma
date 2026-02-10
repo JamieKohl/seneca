@@ -1,0 +1,101 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String              @id @default(cuid())
+  email          String              @unique
+  name           String?
+  passwordHash   String
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  holdings       Holding[]
+  watchlistItems WatchlistItem[]
+  snapshots      PortfolioSnapshot[]
+}
+
+model Holding {
+  id           String        @id @default(cuid())
+  userId       String
+  symbol       String
+  quantity     Float
+  avgCostBasis Float
+  purchaseDate DateTime
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+
+  @@index([userId])
+}
+
+model Transaction {
+  id        String   @id @default(cuid())
+  holdingId String
+  type      String   // BUY or SELL
+  quantity  Float
+  price     Float
+  date      DateTime
+  createdAt DateTime @default(now())
+  holding   Holding  @relation(fields: [holdingId], references: [id], onDelete: Cascade)
+
+  @@index([holdingId])
+}
+
+model PortfolioSnapshot {
+  id         String   @id @default(cuid())
+  userId     String
+  totalValue Float
+  dayChange  Float
+  date       DateTime
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model WatchlistItem {
+  id        String   @id @default(cuid())
+  userId    String
+  symbol    String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, symbol])
+  @@index([userId])
+}
+
+model Signal {
+  id            String   @id @default(cuid())
+  symbol        String
+  signalType    String   // BUY, SELL, HOLD
+  confidence    Float
+  reasoning     String
+  technicalData String?  // JSON string
+  sentimentScore Float?
+  createdAt     DateTime @default(now())
+  expiresAt     DateTime?
+
+  @@index([symbol])
+  @@index([createdAt])
+}
+
+model CachedArticle {
+  id        String   @id @default(cuid())
+  symbol    String
+  headline  String
+  summary   String?
+  sentiment String?  // bullish, bearish, neutral
+  sentimentScore Float?
+  source    String?
+  url       String?
+  publishedAt DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([symbol])
+}
