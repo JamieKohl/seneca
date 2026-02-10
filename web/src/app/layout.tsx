@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Kohlmeyer Equity - AI-Powered Stock Predictions & Alerts",
+  title: "KohlCorp - AI-Powered Stock Predictions & Alerts",
   description:
     "Get AI-powered buy, sell, and hold alerts with profit estimates. Real-time stock market predictions and news-driven insights.",
   manifest: "/manifest.json",

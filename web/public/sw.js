@@ -1,4 +1,4 @@
-const CACHE_NAME = "kohlmeyer-v1";
+const CACHE_NAME = "kohlcorp-v1";
 const PRECACHE_URLS = ["/", "/dashboard", "/offline"];
 
 self.addEventListener("install", (event) => {
@@ -30,7 +30,7 @@ self.addEventListener("fetch", (event) => {
 // Handle push notifications
 self.addEventListener("push", (event) => {
   const data = event.data ? event.data.json() : {};
-  const title = data.title || "Kohlmeyer Equity Alert";
+  const title = data.title || "KohlCorp Alert";
   const options = {
     body: data.body || "New market alert available",
     icon: "/icon-192.png",

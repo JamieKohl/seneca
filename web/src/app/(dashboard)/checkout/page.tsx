@@ -311,7 +311,7 @@ export default function CheckoutPage() {
             Get a custom quote for your team. Includes API access, custom alert rules, and dedicated support.
           </p>
           <a
-            href="mailto:contact@kohlmeyerequity.com"
+            href="mailto:contact@kohlcorp.com"
             className="inline-flex items-center gap-2 rounded-lg bg-purple-600 px-6 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors"
           >
             Contact Sales

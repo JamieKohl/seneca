@@ -1,6 +1,6 @@
 {
-  "name": "Kohlmeyer Equity",
-  "short_name": "Kohlmeyer",
+  "name": "KohlCorp",
+  "short_name": "KohlCorp",
   "description": "AI-powered stock market predictions and buy/sell/hold alerts",
   "start_url": "/dashboard",
   "display": "standalone",

@@ -49,7 +49,7 @@ export default function LoginPage() {
         <div className="text-center">
           <Link href="/" className="inline-flex items-center justify-center gap-2 group">
             <Compass className="h-10 w-10 text-emerald-500 group-hover:rotate-45 transition-transform duration-500" />
-            <span className="text-2xl font-bold text-white">Kohlmeyer Equity</span>
+            <span className="text-2xl font-bold text-white">KohlCorp</span>
           </Link>
           <p className="mt-2 text-sm text-zinc-400">
             AI alerts for your broker — we watch, you trade

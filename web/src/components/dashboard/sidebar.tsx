@@ -50,7 +50,7 @@ export function Sidebar() {
           <Compass className="h-8 w-8 shrink-0 text-emerald-500" />
           {sidebarOpen && (
             <span className="ml-3 text-lg font-bold text-white">
-              Kohlmeyer Equity
+              KohlCorp
             </span>
           )}
         </div>

@@ -27,7 +27,7 @@ export function Navbar() {
           <Link href="/" className="flex items-center gap-2">
             <Compass className="h-7 w-7 text-emerald-500" />
             <span className="text-lg font-bold text-white">
-              Kohlmeyer Equity
+              KohlCorp
             </span>
           </Link>
 

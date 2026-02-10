@@ -30,7 +30,7 @@ export function CTASection() {
 
         {/* Footer */}
         <div className="mt-24 border-t border-zinc-800 pt-8 text-center text-sm text-zinc-500">
-          &copy; {new Date().getFullYear()} Kohlmeyer Equity. All rights reserved.
+          &copy; {new Date().getFullYear()} KohlCorp. All rights reserved.
         </div>
       </div>
     </section>

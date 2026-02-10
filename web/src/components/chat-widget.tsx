@@ -15,7 +15,7 @@ const INITIAL_MESSAGES: Message[] = [
     id: "1",
     role: "assistant",
     content:
-      "Hey! I'm your Kohlmeyer AI assistant. Ask me anything about your positions, market alerts, or how the platform works.",
+      "Hey! I'm your KohlCorp AI assistant. Ask me anything about your positions, market alerts, or how the platform works.",
   },
 ];
 
