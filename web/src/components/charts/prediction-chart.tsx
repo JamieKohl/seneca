@@ -131,7 +131,7 @@ export function PredictionChart({
         const spread = Math.abs(priceTarget - entryPrice);
         const bandSeries = chart.addSeries(lc.LineSeries, {
           color: direction === "up" ? "#22c55e22" : "#ef444422",
-          lineWidth: 0,
+          lineWidth: 1 as const,
           lineVisible: false,
           priceLineVisible: false,
           lastValueVisible: false,
@@ -206,16 +206,27 @@ export function PredictionChart({
       // Add BUY/SELL marker on the last candle
       const lastCandle = candles[candles.length - 1];
       if (lastCandle) {
-        candlestickSeries.setMarkers([
-          {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            time: lastCandle.time as any,
-            position: direction === "up" ? "belowBar" : "aboveBar",
-            color: direction === "up" ? "#22c55e" : "#ef4444",
-            shape: direction === "up" ? "arrowUp" : "arrowDown",
-            text: direction === "up" ? "BUY" : "SELL",
-          },
-        ]);
+        // Use type assertion for setMarkers (API varies across versions)
+        const series = candlestickSeries as unknown as {
+          setMarkers: (markers: Array<{
+            time: unknown;
+            position: string;
+            color: string;
+            shape: string;
+            text: string;
+          }>) => void;
+        };
+        if (typeof series.setMarkers === "function") {
+          series.setMarkers([
+            {
+              time: lastCandle.time,
+              position: direction === "up" ? "belowBar" : "aboveBar",
+              color: direction === "up" ? "#22c55e" : "#ef4444",
+              shape: direction === "up" ? "arrowUp" : "arrowDown",
+              text: direction === "up" ? "BUY" : "SELL",
+            },
+          ]);
+        }
       }
 
       chart.timeScale().fitContent();
