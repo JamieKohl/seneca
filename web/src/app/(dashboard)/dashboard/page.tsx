@@ -1,6 +1,16 @@
 "use client";
 
-import { DollarSign, TrendingUp, BarChart3, Signal, Briefcase } from "lucide-react";
+import {
+  DollarSign,
+  TrendingUp,
+  Signal,
+  Briefcase,
+  ArrowRight,
+  Bell,
+  BarChart3,
+  Zap,
+} from "lucide-react";
+import Link from "next/link";
 import { StatCard } from "@/components/dashboard/stat-card";
 import { StockChart } from "@/components/charts/stock-chart";
 import { WatchlistCard } from "@/components/dashboard/watchlist-card";
@@ -11,6 +21,37 @@ import { useSignals } from "@/hooks/useSignals";
 import { useStockQuote } from "@/hooks/useStockQuote";
 import { useCandles } from "@/hooks/useCandles";
 import { formatCurrency, formatPercent } from "@/lib/utils";
+
+const quickActions = [
+  {
+    label: "Add Position",
+    description: "Log a stock from your broker",
+    href: "/portfolio",
+    icon: Briefcase,
+    color: "text-blue-400 bg-blue-500/10",
+  },
+  {
+    label: "Generate Signals",
+    description: "Get AI buy/sell/hold alerts",
+    href: "/signals",
+    icon: Zap,
+    color: "text-emerald-400 bg-emerald-500/10",
+  },
+  {
+    label: "Alert History",
+    description: "See past alert accuracy",
+    href: "/alerts",
+    icon: Bell,
+    color: "text-amber-400 bg-amber-500/10",
+  },
+  {
+    label: "Performance",
+    description: "Track your returns",
+    href: "/performance",
+    icon: BarChart3,
+    color: "text-purple-400 bg-purple-500/10",
+  },
+];
 
 export default function DashboardPage() {
   const { selectedSymbol, setSelectedSymbol } = useStore();
@@ -29,12 +70,38 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-white">Dashboard</h1>
-        <p className="text-sm text-zinc-400">
-          Live market data and AI alerts for your broker positions
-        </p>
+      {/* Welcome Banner */}
+      <div className="relative overflow-hidden rounded-xl border border-zinc-800 bg-gradient-to-r from-emerald-500/10 via-zinc-900/50 to-zinc-900/50 p-6">
+        <div className="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-emerald-500/5 to-transparent" />
+        <div className="relative">
+          <h1 className="text-2xl font-bold text-white">
+            Welcome back
+          </h1>
+          <p className="mt-1 text-sm text-zinc-400">
+            Live market data and AI alerts for your broker positions
+          </p>
+        </div>
+      </div>
+
+      {/* Quick Actions */}
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        {quickActions.map((action) => (
+          <Link
+            key={action.label}
+            href={action.href}
+            className="group flex items-center gap-3 rounded-xl border border-zinc-800 bg-zinc-900/50 p-4 transition-all hover:border-zinc-700 hover:bg-zinc-900/80"
+          >
+            <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${action.color}`}>
+              <action.icon className="h-5 w-5" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-white group-hover:text-emerald-400 transition-colors">
+                {action.label}
+              </p>
+              <p className="text-xs text-zinc-500 truncate">{action.description}</p>
+            </div>
+          </Link>
+        ))}
       </div>
 
       {/* Stats Grid */}
@@ -44,6 +111,7 @@ export default function DashboardPage() {
           value={totalCost > 0 ? formatCurrency(totalCost) : "$0.00"}
           description={holdingsList.length > 0 ? `${holdingsList.length} positions logged` : "No positions yet"}
           icon={DollarSign}
+          iconColor="text-emerald-500 bg-emerald-500/10"
         />
         <StatCard
           title={`${selectedSymbol} Price`}
@@ -51,19 +119,22 @@ export default function DashboardPage() {
           change={quote ? `${formatPercent(quote.changePercent)} today` : undefined}
           changeValue={quote?.changePercent ?? 0}
           icon={TrendingUp}
+          iconColor="text-blue-500 bg-blue-500/10"
         />
         <StatCard
-          title="Holdings"
+          title="Positions"
           value={`${holdingsList.length}`}
-          description={holdingsList.length > 0 ? holdingsList.map(h => h.symbol).join(", ") : "Add holdings in Portfolio"}
+          description={holdingsList.length > 0 ? holdingsList.map(h => h.symbol).join(", ") : "Add positions in My Positions"}
           icon={Briefcase}
+          iconColor="text-purple-500 bg-purple-500/10"
         />
         <StatCard
-          title="Active Signals"
+          title="Active Alerts"
           value={`${signalsList.length}`}
-          change={signalsList.length > 0 ? `${buySignals} BUY, ${sellSignals} SELL, ${holdSignals} HOLD` : "Generate signals in AI Signals"}
+          change={signalsList.length > 0 ? `${buySignals} BUY, ${sellSignals} SELL, ${holdSignals} HOLD` : "Generate signals to get alerts"}
           changeValue={0}
           icon={Signal}
+          iconColor="text-amber-500 bg-amber-500/10"
         />
       </div>
 
@@ -75,13 +146,29 @@ export default function DashboardPage() {
           <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-4">
             <div className="mb-4 flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-semibold text-white">
-                  {selectedSymbol}
-                </h3>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-lg font-semibold text-white">
+                    {selectedSymbol}
+                  </h3>
+                  {quote && (
+                    <span className={`text-sm font-medium ${
+                      (quote.changePercent ?? 0) >= 0 ? "text-green-400" : "text-red-400"
+                    }`}>
+                      {formatPercent(quote.changePercent)}
+                    </span>
+                  )}
+                </div>
                 <p className="text-sm text-zinc-400">
-                  {quote ? `${formatCurrency(quote.price)} (${formatPercent(quote.changePercent)})` : "Stock Price - Daily Candles"}
+                  {quote ? formatCurrency(quote.price) : "Daily Price Chart"}
                 </p>
               </div>
+              <Link
+                href="/portfolio"
+                className="flex items-center gap-1 text-xs text-zinc-400 hover:text-emerald-400 transition-colors"
+              >
+                View positions
+                <ArrowRight className="h-3 w-3" />
+              </Link>
             </div>
             <StockChart symbol={selectedSymbol} candles={candles} />
           </div>
