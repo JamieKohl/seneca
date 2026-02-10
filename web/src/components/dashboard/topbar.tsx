@@ -1,14 +1,32 @@
 "use client";
 
 import { Search, Bell, User, Zap } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
+import { NotificationPanel } from "./notification-panel";
 
 export function Topbar() {
-  const { sidebarOpen, setSelectedSymbol } = useStore();
+  const { sidebarOpen, setSelectedSymbol, notifications } = useStore();
   const [searchQuery, setSearchQuery] = useState("");
+  const [notifOpen, setNotifOpen] = useState(false);
+  const notifRef = useRef<HTMLDivElement>(null);
+
+  const unreadCount = notifications.filter((n) => !n.read).length;
+
+  // Close notification panel on outside click
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (notifRef.current && !notifRef.current.contains(e.target as Node)) {
+        setNotifOpen(false);
+      }
+    }
+    if (notifOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [notifOpen]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,10 +75,26 @@ export function Topbar() {
           </Link>
 
           {/* Notifications */}
-          <button className="relative rounded-lg p-2 text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors">
-            <Bell className="h-5 w-5" />
-            <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-emerald-500 ring-2 ring-zinc-950" />
-          </button>
+          <div className="relative" ref={notifRef}>
+            <button
+              onClick={() => setNotifOpen(!notifOpen)}
+              className={cn(
+                "relative rounded-lg p-2 text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors",
+                notifOpen && "bg-zinc-800 text-white"
+              )}
+            >
+              <Bell className="h-5 w-5" />
+              {unreadCount > 0 && (
+                <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-emerald-500 px-1 text-[10px] font-bold text-white ring-2 ring-zinc-950">
+                  {unreadCount > 9 ? "9+" : unreadCount}
+                </span>
+              )}
+            </button>
+
+            {notifOpen && (
+              <NotificationPanel onClose={() => setNotifOpen(false)} />
+            )}
+          </div>
 
           {/* User */}
           <button className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20 transition-colors">

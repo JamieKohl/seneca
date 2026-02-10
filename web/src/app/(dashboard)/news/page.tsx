@@ -9,6 +9,7 @@ import {
   Minus,
   Clock,
   Newspaper,
+  Rss,
 } from "lucide-react";
 import { cn, getSentimentColor, timeAgo } from "@/lib/utils";
 import { useStore } from "@/lib/store";
@@ -60,12 +61,22 @@ export default function NewsPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-white">Market News</h1>
-        <p className="text-sm text-zinc-400">
-          Latest news with AI-powered sentiment analysis
-        </p>
+      {/* Header Banner */}
+      <div className="relative overflow-hidden rounded-xl border border-amber-500/20 bg-gradient-to-r from-amber-500/10 via-zinc-900/50 to-zinc-900/50 p-6">
+        <div className="absolute right-6 top-1/2 -translate-y-1/2 opacity-10">
+          <Rss className="h-24 w-24 text-amber-500" />
+        </div>
+        <div className="relative flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10">
+            <Newspaper className="h-5 w-5 text-amber-400" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold text-white">Market News</h1>
+            <p className="text-sm text-zinc-400">
+              Latest news with AI-powered sentiment analysis for your watchlist
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Sentiment Overview */}

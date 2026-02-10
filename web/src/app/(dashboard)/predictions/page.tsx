@@ -67,24 +67,34 @@ export default function PredictionsPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-white">AI Predictions</h1>
-          <p className="text-sm text-zinc-400">
-            AI-powered price predictions with entry/exit targets
-          </p>
+      {/* Header Banner */}
+      <div className="relative overflow-hidden rounded-xl border border-cyan-500/20 bg-gradient-to-r from-cyan-500/10 via-zinc-900/50 to-zinc-900/50 p-6">
+        <div className="absolute right-6 top-1/2 -translate-y-1/2 opacity-10">
+          <Target className="h-24 w-24 text-cyan-500" />
         </div>
-        <button
-          onClick={handleRefresh}
-          disabled={isRefreshing}
-          className="flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700 disabled:opacity-50 transition-colors"
-        >
-          <RefreshCw
-            className={cn("h-4 w-4", isRefreshing && "animate-spin")}
-          />
-          Refresh Predictions
-        </button>
+        <div className="relative flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/10">
+              <Brain className="h-5 w-5 text-cyan-400" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-white">AI Predictions</h1>
+              <p className="text-sm text-zinc-400">
+                AI-powered price predictions with entry/exit targets
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={handleRefresh}
+            disabled={isRefreshing}
+            className="flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700 disabled:opacity-50 transition-colors"
+          >
+            <RefreshCw
+              className={cn("h-4 w-4", isRefreshing && "animate-spin")}
+            />
+            Refresh
+          </button>
+        </div>
       </div>
 
       {/* Stat Cards */}

@@ -93,6 +93,17 @@ export interface WatchlistItem {
   quote?: StockQuote;
 }
 
+export interface Notification {
+  id: string;
+  type: "signal" | "price" | "news" | "system";
+  title: string;
+  body: string;
+  symbol?: string;
+  read: boolean;
+  createdAt: string;
+  actionUrl?: string;
+}
+
 export interface AIAnalysis {
   symbol: string;
   signal: "BUY" | "SELL" | "HOLD";
