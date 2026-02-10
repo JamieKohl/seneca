@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ChatWidget } from "@/components/chat-widget";
 import { ToastContainer } from "@/components/ui/toast";
+import { CookieConsent } from "@/components/cookie-consent";
+import { PWAInstallPrompt } from "@/components/pwa-install-prompt";
+import { ErrorBoundary } from "@/components/error-boundary";
 import "./globals.css";
 
 const inter = Inter({
@@ -60,9 +63,13 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
       <body className={`${inter.variable} font-sans antialiased bg-zinc-950`}>
-        {children}
+        <ErrorBoundary>
+          {children}
+        </ErrorBoundary>
         <ChatWidget />
         <ToastContainer />
+        <CookieConsent />
+        <PWAInstallPrompt />
         <script
           dangerouslySetInnerHTML={{
             __html: `

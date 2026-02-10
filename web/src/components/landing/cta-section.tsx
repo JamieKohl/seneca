@@ -9,15 +9,15 @@ const footerLinks = {
     { label: "Pricing", href: "/checkout" },
   ],
   Company: [
-    { label: "About", href: "#" },
+    { label: "About", href: "/about" },
     { label: "Blog", href: "#" },
     { label: "Careers", href: "#" },
     { label: "Contact", href: "mailto:contact@kohlcorp.com" },
   ],
   Legal: [
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
-    { label: "Disclaimer", href: "#" },
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms of Service", href: "/terms" },
+    { label: "Disclaimer", href: "/terms#disclaimer" },
   ],
 };
 
