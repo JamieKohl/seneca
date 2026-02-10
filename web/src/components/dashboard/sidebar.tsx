@@ -17,6 +17,12 @@ import {
   Home,
   Eye,
   Crown,
+  Target,
+  Calendar,
+  GitCompareArrows,
+  Trophy,
+  MessageSquare,
+  Gift,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useStore } from "@/lib/store";
@@ -27,9 +33,15 @@ const navItems = [
   { href: "/portfolio", label: "My Positions", icon: Briefcase },
   { href: "/watchlist", label: "Watchlist", icon: Eye },
   { href: "/signals", label: "AI Signals", icon: Signal },
+  { href: "/price-alerts", label: "Price Alerts", icon: Target },
   { href: "/alerts", label: "Alert History", icon: Bell },
   { href: "/performance", label: "Performance", icon: TrendingUp },
   { href: "/predictions", label: "AI Predictions", icon: Brain },
+  { href: "/earnings", label: "Earnings", icon: Calendar },
+  { href: "/compare", label: "Compare", icon: GitCompareArrows },
+  { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
+  { href: "/community", label: "Community", icon: MessageSquare },
+  { href: "/referral", label: "Refer & Earn", icon: Gift },
   { href: "/news", label: "News", icon: Newspaper },
   { href: "/settings", label: "Settings", icon: Settings },
 ];

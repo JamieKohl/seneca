@@ -1,41 +1,22 @@
 "use client";
 
-import { Search, Bell, Zap } from "lucide-react";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { Bell, Zap } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
 import { NotificationPanel } from "./notification-panel";
 import { UserMenu } from "./user-menu";
+import { SearchAutocomplete } from "./search-autocomplete";
 import { useMarketStatus } from "@/hooks/useMarketStatus";
 
 export function Topbar() {
-  const { sidebarOpen, setSelectedSymbol, notifications } = useStore();
-  const [searchQuery, setSearchQuery] = useState("");
+  const { sidebarOpen, notifications } = useStore();
   const [notifOpen, setNotifOpen] = useState(false);
   const notifRef = useRef<HTMLDivElement>(null);
-  const searchRef = useRef<HTMLInputElement>(null);
 
   const unreadCount = notifications.filter((n) => !n.read).length;
   const marketStatus = useMarketStatus();
-
-  // Cmd/Ctrl+K to focus search
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-      e.preventDefault();
-      searchRef.current?.focus();
-    }
-    // Escape to blur search
-    if (e.key === "Escape" && document.activeElement === searchRef.current) {
-      searchRef.current?.blur();
-      setSearchQuery("");
-    }
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [handleKeyDown]);
 
   // Close notification panel on outside click
   useEffect(() => {
@@ -50,15 +31,6 @@ export function Topbar() {
     }
   }, [notifOpen]);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      setSelectedSymbol(searchQuery.trim().toUpperCase());
-      setSearchQuery("");
-      searchRef.current?.blur();
-    }
-  };
-
   return (
     <header
       className={cn(
@@ -69,20 +41,7 @@ export function Topbar() {
     >
       <div className="flex h-full items-center justify-between px-6">
         {/* Search */}
-        <form onSubmit={handleSearch} className="relative w-80 lg:w-96">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500" />
-          <input
-            ref={searchRef}
-            type="text"
-            placeholder="Search stocks (e.g. AAPL, TSLA)..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-lg border border-zinc-800 bg-zinc-900 py-2 pl-10 pr-16 text-sm text-white placeholder-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-colors"
-          />
-          <kbd className="absolute right-3 top-1/2 -translate-y-1/2 hidden sm:inline-flex items-center gap-0.5 rounded border border-zinc-700 bg-zinc-800 px-1.5 py-0.5 text-[10px] font-medium text-zinc-500">
-            <span className="text-xs">⌘</span>K
-          </kbd>
-        </form>
+        <SearchAutocomplete />
 
         {/* Right side */}
         <div className="flex items-center gap-2">

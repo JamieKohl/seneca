@@ -13,6 +13,11 @@ import {
   Monitor,
   Mail,
   Settings,
+  Clock,
+  FolderPlus,
+  Trash2,
+  Download,
+  Briefcase,
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -36,6 +41,14 @@ export default function SettingsPage() {
     portfolio: true,
   });
   const [alertPref, setAlertPref] = useState("watchlistOnly");
+  const [quietHoursEnabled, setQuietHoursEnabled] = useState(false);
+  const [quietStart, setQuietStart] = useState("22:00");
+  const [quietEnd, setQuietEnd] = useState("08:00");
+  const [portfolios, setPortfolios] = useState([
+    { id: "1", name: "Main Portfolio", holdings: 8, isDefault: true },
+    { id: "2", name: "Retirement (401k)", holdings: 4, isDefault: false },
+  ]);
+  const [newPortfolioName, setNewPortfolioName] = useState("");
 
   const handleSave = async () => {
     setSaved(true);
@@ -261,6 +274,154 @@ export default function SettingsPage() {
               </div>
             </button>
           ))}
+        </div>
+      </div>
+
+      {/* Alert Scheduling */}
+      <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-6">
+        <div className="mb-4 flex items-center gap-2">
+          <Clock className="h-5 w-5 text-emerald-500" />
+          <h3 className="text-lg font-semibold text-white">Alert Schedule</h3>
+        </div>
+        <p className="mb-4 text-sm text-zinc-400">
+          Set quiet hours when you don&apos;t want to receive alert notifications.
+        </p>
+        <div className="space-y-4">
+          <label className="flex items-center justify-between rounded-lg px-3 py-3 hover:bg-zinc-800/50 transition-colors cursor-pointer">
+            <div className="flex items-center gap-3">
+              <Clock className="h-4 w-4 text-zinc-500" />
+              <span className="text-sm text-zinc-300">Enable Quiet Hours</span>
+            </div>
+            <button
+              onClick={() => setQuietHoursEnabled(!quietHoursEnabled)}
+              className={cn(
+                "relative h-6 w-11 rounded-full transition-colors",
+                quietHoursEnabled ? "bg-emerald-600" : "bg-zinc-700"
+              )}
+            >
+              <span
+                className={cn(
+                  "absolute top-0.5 h-5 w-5 rounded-full bg-white transition-transform",
+                  quietHoursEnabled ? "left-[22px]" : "left-0.5"
+                )}
+              />
+            </button>
+          </label>
+          {quietHoursEnabled && (
+            <div className="grid grid-cols-2 gap-4 pl-10">
+              <div>
+                <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-zinc-500">
+                  Start Time
+                </label>
+                <input
+                  type="time"
+                  value={quietStart}
+                  onChange={(e) => setQuietStart(e.target.value)}
+                  className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2.5 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-zinc-500">
+                  End Time
+                </label>
+                <input
+                  type="time"
+                  value={quietEnd}
+                  onChange={(e) => setQuietEnd(e.target.value)}
+                  className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2.5 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Multi-Portfolio */}
+      <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-6">
+        <div className="mb-4 flex items-center gap-2">
+          <FolderPlus className="h-5 w-5 text-emerald-500" />
+          <h3 className="text-lg font-semibold text-white">Portfolios</h3>
+        </div>
+        <p className="mb-4 text-sm text-zinc-400">
+          Manage multiple portfolios to track positions across different brokers or strategies.
+        </p>
+        <div className="space-y-2 mb-4">
+          {portfolios.map((p) => (
+            <div
+              key={p.id}
+              className={cn(
+                "flex items-center justify-between rounded-lg border p-3 transition-all",
+                p.isDefault ? "border-emerald-500/30 bg-emerald-500/5" : "border-zinc-800 hover:border-zinc-700"
+              )}
+            >
+              <div className="flex items-center gap-3">
+                <Briefcase className="h-4 w-4 text-zinc-500" />
+                <div>
+                  <p className="text-sm font-medium text-white">{p.name}</p>
+                  <p className="text-xs text-zinc-500">{p.holdings} positions</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                {p.isDefault && (
+                  <span className="rounded bg-emerald-500/10 px-2 py-0.5 text-[10px] font-medium text-emerald-400">
+                    Default
+                  </span>
+                )}
+                {!p.isDefault && (
+                  <button
+                    onClick={() => setPortfolios(portfolios.filter((x) => x.id !== p.id))}
+                    className="rounded-lg p-1.5 text-zinc-600 hover:bg-red-500/10 hover:text-red-400 transition-colors"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="flex gap-2">
+          <input
+            type="text"
+            value={newPortfolioName}
+            onChange={(e) => setNewPortfolioName(e.target.value)}
+            placeholder="New portfolio name..."
+            className="flex-1 rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-white placeholder-zinc-500 focus:border-emerald-500 focus:outline-none"
+          />
+          <button
+            onClick={() => {
+              if (newPortfolioName.trim()) {
+                setPortfolios([
+                  ...portfolios,
+                  { id: Date.now().toString(), name: newPortfolioName.trim(), holdings: 0, isDefault: false },
+                ]);
+                setNewPortfolioName("");
+              }
+            }}
+            className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-500 transition-colors"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+
+      {/* Export Data */}
+      <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-6">
+        <div className="mb-4 flex items-center gap-2">
+          <Download className="h-5 w-5 text-emerald-500" />
+          <h3 className="text-lg font-semibold text-white">Export Data</h3>
+        </div>
+        <p className="mb-4 text-sm text-zinc-400">
+          Download your portfolio data and alert history as CSV files.
+        </p>
+        <div className="flex gap-3">
+          <button className="flex items-center gap-2 rounded-lg border border-zinc-700 px-4 py-2.5 text-sm font-medium text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors">
+            <Download className="h-4 w-4" />
+            Export Positions
+          </button>
+          <button className="flex items-center gap-2 rounded-lg border border-zinc-700 px-4 py-2.5 text-sm font-medium text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors">
+            <Download className="h-4 w-4" />
+            Export Alerts
+          </button>
         </div>
       </div>
 

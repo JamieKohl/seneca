@@ -2,6 +2,7 @@
 
 import { Sidebar } from "@/components/dashboard/sidebar";
 import { Topbar } from "@/components/dashboard/topbar";
+import { OnboardingFlow } from "@/components/onboarding";
 import { useStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
 
@@ -24,6 +25,7 @@ export default function DashboardLayout({
       >
         <div className="p-6">{children}</div>
       </main>
+      <OnboardingFlow />
     </div>
   );
 }

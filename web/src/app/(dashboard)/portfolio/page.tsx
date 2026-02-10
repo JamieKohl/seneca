@@ -338,6 +338,106 @@ export default function PortfolioPage() {
         </div>
       )}
 
+      {/* Sector, Risk, Dividends */}
+      {holdingsList.length > 0 && (
+        <div className="grid gap-6 lg:grid-cols-3">
+          {/* Sector Breakdown */}
+          <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5">
+            <div className="flex items-center gap-2 mb-4">
+              <PieChart className="h-4 w-4 text-violet-400" />
+              <h3 className="text-sm font-semibold text-white">Sector Breakdown</h3>
+            </div>
+            <div className="space-y-3">
+              {[
+                { sector: "Technology", pct: 62, color: "bg-blue-500" },
+                { sector: "Consumer Cyclical", pct: 18, color: "bg-amber-500" },
+                { sector: "Healthcare", pct: 12, color: "bg-emerald-500" },
+                { sector: "Financial", pct: 8, color: "bg-violet-500" },
+              ].map((s) => (
+                <div key={s.sector}>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs text-zinc-400">{s.sector}</span>
+                    <span className="text-xs font-medium text-white">{s.pct}%</span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-zinc-800">
+                    <div className={`h-full rounded-full ${s.color}`} style={{ width: `${s.pct}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Risk Score */}
+          <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5">
+            <div className="flex items-center gap-2 mb-4">
+              <BarChart3 className="h-4 w-4 text-amber-400" />
+              <h3 className="text-sm font-semibold text-white">Risk Assessment</h3>
+            </div>
+            <div className="flex flex-col items-center py-2">
+              <div className="relative h-24 w-24 mb-3">
+                <svg className="h-full w-full -rotate-90" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="#27272a" strokeWidth="8" />
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="#f59e0b" strokeWidth="8" strokeDasharray={`${65 * 2.64} 264`} strokeLinecap="round" />
+                </svg>
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <span className="text-2xl font-bold text-amber-400">65</span>
+                  <span className="text-[10px] text-zinc-500">/ 100</span>
+                </div>
+              </div>
+              <span className="rounded-full bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-400">Moderate Risk</span>
+              <div className="mt-3 w-full space-y-2">
+                <div className="flex justify-between text-xs">
+                  <span className="text-zinc-500">Diversification</span>
+                  <span className="text-zinc-300">Medium</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span className="text-zinc-500">Volatility (Beta)</span>
+                  <span className="text-amber-400">1.34</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span className="text-zinc-500">Concentration</span>
+                  <span className="text-amber-400">High</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Dividends */}
+          <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5">
+            <div className="flex items-center gap-2 mb-4">
+              <DollarSign className="h-4 w-4 text-emerald-400" />
+              <h3 className="text-sm font-semibold text-white">Dividend Income</h3>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <p className="text-xs text-zinc-500">Estimated Annual</p>
+                <p className="text-2xl font-bold text-emerald-400">$842.50</p>
+              </div>
+              <div>
+                <p className="text-xs text-zinc-500">Avg Yield</p>
+                <p className="text-lg font-semibold text-white">1.28%</p>
+              </div>
+              <div className="border-t border-zinc-800 pt-3 space-y-2">
+                <p className="text-xs text-zinc-500 uppercase tracking-wide">Top Payers</p>
+                {[
+                  { symbol: "AAPL", amount: "$320/yr", yield: "0.51%" },
+                  { symbol: "MSFT", amount: "$215/yr", yield: "0.75%" },
+                  { symbol: "JPM", amount: "$180/yr", yield: "2.30%" },
+                ].map((d) => (
+                  <div key={d.symbol} className="flex items-center justify-between">
+                    <span className="text-xs font-medium text-white">{d.symbol}</span>
+                    <div className="text-right">
+                      <span className="text-xs text-emerald-400">{d.amount}</span>
+                      <span className="text-[10px] text-zinc-500 ml-2">{d.yield}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Holdings Table */}
       <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 overflow-hidden">
         <div className="flex items-center justify-between border-b border-zinc-800 px-5 py-4">
