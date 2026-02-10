@@ -55,7 +55,7 @@ const testimonials = [
 
 export function TestimonialsSection() {
   return (
-    <section className="relative overflow-hidden border-t border-zinc-800/50 py-20">
+    <section id="testimonials" className="relative overflow-hidden border-t border-zinc-800/50 py-20 scroll-mt-16">
       <div className="mx-auto max-w-6xl px-6">
         {/* Header */}
         <div className="text-center mb-12">

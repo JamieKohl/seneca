@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ChatWidget } from "@/components/chat-widget";
+import { ToastContainer } from "@/components/ui/toast";
 import "./globals.css";
 
 const inter = Inter({
@@ -61,6 +62,7 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans antialiased bg-zinc-950`}>
         {children}
         <ChatWidget />
+        <ToastContainer />
         <script
           dangerouslySetInnerHTML={{
             __html: `
