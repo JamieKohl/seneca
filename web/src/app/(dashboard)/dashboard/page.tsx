@@ -3,14 +3,19 @@
 import {
   DollarSign,
   TrendingUp,
+  TrendingDown,
   Signal,
   Briefcase,
   ArrowRight,
   Bell,
   BarChart3,
   Zap,
+  Flame,
+  ArrowUpRight,
+  ArrowDownRight,
 } from "lucide-react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 import { StatCard } from "@/components/dashboard/stat-card";
 import { StockChart } from "@/components/charts/stock-chart";
 import { WatchlistCard } from "@/components/dashboard/watchlist-card";
@@ -21,6 +26,17 @@ import { useSignals } from "@/hooks/useSignals";
 import { useStockQuote } from "@/hooks/useStockQuote";
 import { useCandles } from "@/hooks/useCandles";
 import { formatCurrency, formatPercent } from "@/lib/utils";
+
+const marketMovers = [
+  { symbol: "NVDA", name: "NVIDIA", price: 875.28, change: 4.82 },
+  { symbol: "META", name: "Meta Platforms", price: 512.64, change: 2.91 },
+  { symbol: "TSLA", name: "Tesla", price: 248.50, change: 3.24 },
+  { symbol: "AMD", name: "AMD", price: 178.32, change: -1.87 },
+  { symbol: "AAPL", name: "Apple", price: 189.84, change: 0.64 },
+  { symbol: "GOOGL", name: "Alphabet", price: 155.72, change: -0.43 },
+  { symbol: "MSFT", name: "Microsoft", price: 415.60, change: 1.12 },
+  { symbol: "AMZN", name: "Amazon", price: 186.92, change: 2.05 },
+];
 
 const quickActions = [
   {
@@ -138,6 +154,35 @@ export default function DashboardPage() {
         />
       </div>
 
+      {/* Ticker Strip */}
+      <div className="overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/50">
+        <div className="flex items-center animate-[scroll_30s_linear_infinite]">
+          {[...marketMovers, ...marketMovers].map((stock, i) => (
+            <button
+              key={`${stock.symbol}-${i}`}
+              onClick={() => setSelectedSymbol(stock.symbol)}
+              className="flex shrink-0 items-center gap-3 border-r border-zinc-800/50 px-5 py-2.5 hover:bg-zinc-800/50 transition-colors"
+            >
+              <span className="text-sm font-bold text-white">{stock.symbol}</span>
+              <span className="text-xs text-zinc-500">{formatCurrency(stock.price)}</span>
+              <span
+                className={cn(
+                  "flex items-center gap-0.5 text-xs font-medium",
+                  stock.change >= 0 ? "text-emerald-400" : "text-red-400"
+                )}
+              >
+                {stock.change >= 0 ? (
+                  <ArrowUpRight className="h-3 w-3" />
+                ) : (
+                  <ArrowDownRight className="h-3 w-3" />
+                )}
+                {stock.change >= 0 ? "+" : ""}{stock.change.toFixed(2)}%
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Main Content Grid */}
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Chart - takes 2 columns */}
@@ -178,6 +223,59 @@ export default function DashboardPage() {
         <div className="space-y-6">
           <WatchlistCard onSelect={setSelectedSymbol} />
           <RecentSignalsCard />
+        </div>
+      </div>
+
+      {/* Market Movers */}
+      <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <Flame className="h-5 w-5 text-orange-400" />
+            <h3 className="text-base font-semibold text-white">Market Movers</h3>
+          </div>
+          <Link
+            href="/signals"
+            className="flex items-center gap-1 text-xs text-zinc-400 hover:text-emerald-400 transition-colors"
+          >
+            View AI Signals
+            <ArrowRight className="h-3 w-3" />
+          </Link>
+        </div>
+        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+          {marketMovers.map((stock) => (
+            <button
+              key={stock.symbol}
+              onClick={() => setSelectedSymbol(stock.symbol)}
+              className="group flex items-center justify-between rounded-lg border border-zinc-800 bg-zinc-900/80 px-3 py-2.5 hover:border-zinc-700 hover:bg-zinc-800/80 transition-all"
+            >
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">
+                    {stock.symbol}
+                  </span>
+                  {stock.change >= 0 ? (
+                    <TrendingUp className="h-3 w-3 text-emerald-500" />
+                  ) : (
+                    <TrendingDown className="h-3 w-3 text-red-500" />
+                  )}
+                </div>
+                <p className="text-xs text-zinc-500 truncate">{stock.name}</p>
+              </div>
+              <div className="text-right">
+                <p className="text-sm font-medium text-white">
+                  {formatCurrency(stock.price)}
+                </p>
+                <p
+                  className={cn(
+                    "text-xs font-medium",
+                    stock.change >= 0 ? "text-emerald-400" : "text-red-400"
+                  )}
+                >
+                  {stock.change >= 0 ? "+" : ""}{stock.change.toFixed(2)}%
+                </p>
+              </div>
+            </button>
+          ))}
         </div>
       </div>
     </div>

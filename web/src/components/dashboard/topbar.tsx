@@ -1,11 +1,12 @@
 "use client";
 
-import { Search, Bell, User, Zap } from "lucide-react";
+import { Search, Bell, Zap } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
 import { NotificationPanel } from "./notification-panel";
+import { UserMenu } from "./user-menu";
 
 export function Topbar() {
   const { sidebarOpen, setSelectedSymbol, notifications } = useStore();
@@ -96,10 +97,8 @@ export function Topbar() {
             )}
           </div>
 
-          {/* User */}
-          <button className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20 transition-colors">
-            <User className="h-4 w-4" />
-          </button>
+          {/* User Menu */}
+          <UserMenu />
         </div>
       </div>
     </header>
