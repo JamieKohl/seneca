@@ -1,7 +1,9 @@
 export { Navbar } from "./navbar";
 export { HeroSection } from "./hero-section";
 export { AlertTicker } from "./alert-ticker";
+export { TrustedBySection } from "./trusted-by-section";
 export { StatsSection } from "./stats-section";
+export { SampleAlertSection } from "./sample-alert-section";
 export { HowItWorksSection } from "./how-it-works-section";
 export { FeaturesSection } from "./features-section";
 export { PricingSection } from "./pricing-section";

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ChatWidget } from "@/components/chat-widget";
 import "./globals.css";
 
 const inter = Inter({
@@ -29,6 +30,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} font-sans antialiased bg-zinc-950`}>
         {children}
+        <ChatWidget />
         <script
           dangerouslySetInnerHTML={{
             __html: `

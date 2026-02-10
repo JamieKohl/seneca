@@ -3,8 +3,10 @@ import { Globe } from "./globe";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen pt-16 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="relative min-h-screen pt-16 overflow-hidden bg-grid">
+      {/* Top gradient fade */}
+      <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-transparent to-zinc-950 pointer-events-none" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid min-h-[calc(100vh-4rem)] items-center gap-8 lg:grid-cols-2 lg:gap-12">
           {/* Left: Headline */}
           <div className="flex flex-col justify-center py-12 lg:py-0">

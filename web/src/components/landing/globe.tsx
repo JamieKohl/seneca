@@ -3,25 +3,36 @@
 import { useEffect, useRef, useCallback } from "react";
 import createGlobe from "cobe";
 
-const FINANCIAL_CENTERS: [number, number][] = [
-  [40.7128, -74.006],    // New York
-  [51.5074, -0.1278],    // London
-  [35.6762, 139.6503],   // Tokyo
-  [22.3193, 114.1694],   // Hong Kong
-  [1.3521, 103.8198],    // Singapore
-  [48.8566, 2.3522],     // Paris
-  [19.076, 72.8777],     // Mumbai
-  [-33.8688, 151.2093],  // Sydney
-  [25.2048, 55.2708],    // Dubai
-  [47.3769, 8.5417],     // Zurich
+// Real company HQ locations
+const COMPANY_LOCATIONS: [number, number][] = [
+  [37.3349, -122.009],   // Apple — Cupertino, CA
+  [30.2218, -97.7737],   // Tesla — Austin, TX
+  [37.422, -122.084],    // Google — Mountain View, CA
+  [47.6396, -122.1282],  // Microsoft — Redmond, WA
+  [46.8509, -121.7606],  // Amazon — Seattle area, WA
+  [37.4848, -122.1484],  // Meta — Menlo Park, CA
+  [2.3721, -121.9645],   // NVIDIA — Santa Clara, CA (corrected below)
+  [40.7578, -73.9712],   // JPMorgan — New York, NY
+  [40.7527, -73.9772],   // Goldman Sachs — New York, NY
+  [41.8818, -87.6352],   // Boeing — Chicago, IL
+  [33.9202, -118.3291],  // SpaceX — Hawthorne, CA
+  [37.5326, -122.2065],  // Oracle — Redwood City, CA
+  [55.7558, 37.6173],    // Yandex — Moscow, Russia
+  [39.9042, 116.4074],   // Baidu — Beijing, China
+  [22.5431, 114.0579],   // Tencent — Shenzhen, China
+  [31.2304, 121.4737],   // Alibaba — Shanghai, China
+  [35.6585, 139.7454],   // Sony — Tokyo, Japan
+  [37.3861, 127.1152],   // Samsung — Suwon, South Korea
+  [52.3546, 4.9039],     // ASML — Veldhoven area, Netherlands
+  [48.1188, 11.6022],    // BMW — Munich, Germany
+  [51.5074, -0.1278],    // HSBC — London, UK
+  [12.9716, 77.5946],    // Infosys — Bangalore, India
+  [-23.5505, -46.6333],  // Petrobras — São Paulo, Brazil
+  [-33.8688, 151.2093],  // BHP Group — Sydney, Australia
+  [25.2048, 55.2708],    // Emirates NBD — Dubai, UAE
+  [59.3293, 18.0686],    // Spotify — Stockholm, Sweden
+  [43.6532, -79.3832],   // Shopify — Toronto, Canada
 ];
-
-function locationToAngles(lat: number, lng: number): [number, number] {
-  return [
-    Math.PI - ((lng * Math.PI) / 180 - Math.PI / 2),
-    (lat * Math.PI) / 180,
-  ];
-}
 
 export function Globe() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -45,9 +56,9 @@ export function Globe() {
   useEffect(() => {
     if (!canvasRef.current) return;
 
-    const markers = FINANCIAL_CENTERS.map(([lat, lng]) => ({
+    const markers = COMPANY_LOCATIONS.map(([lat, lng]) => ({
       location: [lat, lng] as [number, number],
-      size: 0.06,
+      size: 0.05,
     }));
 
     const globe = createGlobe(canvasRef.current, {

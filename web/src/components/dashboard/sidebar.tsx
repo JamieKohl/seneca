@@ -15,11 +15,13 @@ import {
   ChevronRight,
   Bell,
   TrendingUp,
+  Home,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useStore } from "@/lib/store";
 
 const navItems = [
+  { href: "/", label: "Home", icon: Home },
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/portfolio", label: "My Positions", icon: Briefcase },
   { href: "/signals", label: "AI Signals", icon: Signal },

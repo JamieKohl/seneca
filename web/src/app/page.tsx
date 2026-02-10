@@ -2,7 +2,9 @@ import {
   Navbar,
   HeroSection,
   AlertTicker,
+  TrustedBySection,
   StatsSection,
+  SampleAlertSection,
   HowItWorksSection,
   FeaturesSection,
   PricingSection,
@@ -15,6 +17,8 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <AlertTicker />
+      <TrustedBySection />
+      <SampleAlertSection />
       <StatsSection />
       <HowItWorksSection />
       <FeaturesSection />
