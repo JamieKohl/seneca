@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { useSession } from "next-auth/react";
+import useSWR from "swr";
 import {
   User,
   Settings,
@@ -35,8 +35,10 @@ const menuItems = [
   },
 ];
 
+const fetcher = (url: string) => fetch(url).then((r) => r.json());
+
 export function UserMenu() {
-  const { data: session } = useSession();
+  const { data: session } = useSWR("/api/auth/session", fetcher);
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
