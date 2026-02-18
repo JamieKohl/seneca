@@ -19,7 +19,7 @@ const values = [
     title: "Security First",
     description:
       "We never connect to your broker. Your financial data stays yours. We only work with the position data you voluntarily share.",
-    color: "text-emerald-400 bg-emerald-500/10",
+    color: "text-blue-500 bg-blue-600/10",
   },
   {
     icon: Brain,
@@ -65,8 +65,8 @@ export default function AboutPage() {
 
         {/* Hero */}
         <div className="text-center mb-16">
-          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/10 border border-emerald-500/20">
-            <Compass className="h-8 w-8 text-emerald-500" />
+          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-600/10 border border-blue-600/20">
+            <Compass className="h-8 w-8 text-blue-600" />
           </div>
           <h1 className="text-4xl font-bold mb-4">About KohlCorp</h1>
           <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">
@@ -77,7 +77,7 @@ export default function AboutPage() {
         {/* Mission */}
         <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-8 mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <Globe className="h-6 w-6 text-emerald-500" />
+            <Globe className="h-6 w-6 text-blue-600" />
             <h2 className="text-xl font-bold">Our Mission</h2>
           </div>
           <p className="text-zinc-400 leading-relaxed">
@@ -92,7 +92,7 @@ export default function AboutPage() {
               key={stat.label}
               className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 text-center"
             >
-              <p className="text-2xl font-bold text-emerald-400">
+              <p className="text-2xl font-bold text-blue-500">
                 {stat.value}
               </p>
               <p className="text-xs text-zinc-500 mt-1">{stat.label}</p>
@@ -142,7 +142,7 @@ export default function AboutPage() {
         <div className="text-center mt-12">
           <Link
             href="/register"
-            className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white hover:bg-emerald-500 transition-colors"
+            className="inline-flex items-center gap-2 rounded-lg bg-blue-700 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-600 transition-colors"
           >
             Get Started Free
           </Link>

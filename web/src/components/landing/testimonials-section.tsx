@@ -5,51 +5,51 @@ import { Star } from "lucide-react";
 const testimonials = [
   {
     name: "Marcus T.",
-    role: "Swing Trader",
+    role: "Small Business Owner",
     avatar: "MT",
-    color: "bg-emerald-500/20 text-emerald-400",
+    color: "bg-blue-600/20 text-blue-500",
     rating: 5,
-    text: "Got a sell alert on TSLA right before it dropped 8%. Opened Robinhood and closed my position in under a minute. This app literally saved me thousands.",
+    text: "Shield caught a phishing email that my spam filter missed — it looked exactly like a real invoice from my vendor. Could have lost $8,000.",
   },
   {
     name: "Sarah K.",
-    role: "Part-time Investor",
+    role: "Working Mom",
     avatar: "SK",
     color: "bg-blue-500/20 text-blue-400",
     rating: 5,
-    text: "I don't have time to watch the market all day. KohlCorp tells me exactly when to open my broker and what to do. It's like having a financial advisor in my pocket.",
+    text: "I had no idea I was paying for 6 subscriptions I never use. Shield found them all and helped me cancel. Saving $87/month now.",
   },
   {
     name: "David R.",
-    role: "Day Trader",
+    role: "Privacy Advocate",
     avatar: "DR",
     color: "bg-purple-500/20 text-purple-400",
     rating: 5,
-    text: "The AI signals have an insane hit rate. I was skeptical at first but after 3 months of tracking, the accuracy speaks for itself. Pro plan is worth every penny.",
+    text: "The Privacy Autopilot is incredible. It found my info on 23 data broker sites and walked me through opting out of every single one.",
   },
   {
     name: "Jennifer L.",
-    role: "Casual Investor",
+    role: "Online Shopper",
     avatar: "JL",
     color: "bg-amber-500/20 text-amber-400",
     rating: 4,
-    text: "Love that it doesn't connect to my broker. I just log what I own and get alerts. Simple, safe, and the predictions are surprisingly accurate.",
+    text: "Price Watch showed me that the same laptop was $200 cheaper in an incognito window. Companies really do charge different prices based on your data.",
   },
   {
     name: "Chris W.",
-    role: "Portfolio Manager",
+    role: "Retired Teacher",
     avatar: "CW",
     color: "bg-red-500/20 text-red-400",
     rating: 5,
-    text: "Managing 30+ positions across Fidelity and Webull. KohlCorp's alerts help me stay on top of everything. The confidence scores and technical data are a great addition.",
+    text: "My parents were getting scam calls daily. Shield analyzes every suspicious call and text — they feel so much safer now. Worth every penny.",
   },
   {
     name: "Amy P.",
-    role: "Beginner Investor",
+    role: "College Student",
     avatar: "AP",
     color: "bg-cyan-500/20 text-cyan-400",
     rating: 5,
-    text: "Started investing 6 months ago and was overwhelmed. KohlCorp breaks everything down into simple buy/sell/hold alerts. It's made investing so much less scary.",
+    text: "As a student I can't afford to waste money. Shield found 3 free trials I forgot to cancel and a sketchy phishing text. Already saved more than the subscription costs.",
   },
 ];
 
@@ -57,27 +57,24 @@ export function TestimonialsSection() {
   return (
     <section id="testimonials" className="relative overflow-hidden border-t border-zinc-800/50 py-20 scroll-mt-16">
       <div className="mx-auto max-w-6xl px-6">
-        {/* Header */}
         <div className="text-center mb-12">
-          <p className="text-sm font-semibold text-emerald-500 mb-2">
+          <p className="text-sm font-semibold text-blue-600 mb-2">
             TESTIMONIALS
           </p>
           <h2 className="text-3xl font-bold text-white sm:text-4xl">
-            Trusted by Traders Everywhere
+            Trusted by Thousands
           </h2>
           <p className="mt-3 text-zinc-400 max-w-xl mx-auto">
-            See what our users are saying about KohlCorp&apos;s AI-powered alerts
+            See how Shield is protecting people&apos;s money and privacy every day
           </p>
         </div>
 
-        {/* Testimonial Grid */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.name}
               className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 transition-colors hover:border-zinc-700"
             >
-              {/* Stars */}
               <div className="flex items-center gap-0.5 mb-3">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star
@@ -91,12 +88,10 @@ export function TestimonialsSection() {
                 ))}
               </div>
 
-              {/* Quote */}
               <p className="text-sm text-zinc-300 leading-relaxed mb-4">
                 &ldquo;{testimonial.text}&rdquo;
               </p>
 
-              {/* Author */}
               <div className="flex items-center gap-3">
                 <div
                   className={`flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold ${testimonial.color}`}

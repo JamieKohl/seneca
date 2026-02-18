@@ -4,9 +4,10 @@ import {
   Bell,
   BellOff,
   CheckCheck,
-  Zap,
+  ShieldAlert,
+  CreditCard,
+  UserX,
   DollarSign,
-  Newspaper,
   Info,
   X,
   ExternalLink,
@@ -18,27 +19,32 @@ import type { Notification } from "@/types";
 
 const typeConfig: Record<
   Notification["type"],
-  { icon: typeof Zap; color: string; bg: string }
+  { icon: typeof ShieldAlert; color: string; bg: string }
 > = {
-  signal: {
-    icon: Zap,
-    color: "text-emerald-400",
-    bg: "bg-emerald-500/10",
+  scam: {
+    icon: ShieldAlert,
+    color: "text-red-400",
+    bg: "bg-red-500/10",
+  },
+  subscription: {
+    icon: CreditCard,
+    color: "text-amber-400",
+    bg: "bg-amber-500/10",
+  },
+  privacy: {
+    icon: UserX,
+    color: "text-purple-400",
+    bg: "bg-purple-500/10",
   },
   price: {
     icon: DollarSign,
     color: "text-blue-400",
     bg: "bg-blue-500/10",
   },
-  news: {
-    icon: Newspaper,
-    color: "text-amber-400",
-    bg: "bg-amber-500/10",
-  },
   system: {
     icon: Info,
-    color: "text-purple-400",
-    bg: "bg-purple-500/10",
+    color: "text-blue-500",
+    bg: "bg-blue-600/10",
   },
 };
 
@@ -61,10 +67,10 @@ export function NotificationPanel({ onClose }: NotificationPanelProps) {
       {/* Header */}
       <div className="flex items-center justify-between border-b border-zinc-800 px-4 py-3">
         <div className="flex items-center gap-2">
-          <Bell className="h-4 w-4 text-emerald-500" />
+          <Bell className="h-4 w-4 text-blue-600" />
           <h3 className="text-sm font-semibold text-white">Notifications</h3>
           {unreadCount > 0 && (
-            <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-emerald-600 px-1.5 text-[10px] font-bold text-white">
+            <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-blue-700 px-1.5 text-[10px] font-bold text-white">
               {unreadCount}
             </span>
           )}
@@ -109,13 +115,13 @@ export function NotificationPanel({ onClose }: NotificationPanelProps) {
                 className={cn(
                   "group relative flex gap-3 px-4 py-3 transition-colors",
                   !notification.read
-                    ? "bg-emerald-500/[0.03] hover:bg-zinc-900/80"
+                    ? "bg-blue-600/[0.03] hover:bg-zinc-900/80"
                     : "hover:bg-zinc-900/50"
                 )}
               >
                 {/* Unread dot */}
                 {!notification.read && (
-                  <div className="absolute left-1.5 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  <div className="absolute left-1.5 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-blue-600" />
                 )}
 
                 {/* Icon */}
@@ -158,13 +164,8 @@ export function NotificationPanel({ onClose }: NotificationPanelProps) {
                     <span className="text-[10px] text-zinc-600">
                       {timeAgo(notification.createdAt)}
                     </span>
-                    {notification.symbol && (
-                      <span className="rounded bg-zinc-800 px-1.5 py-0.5 text-[10px] font-semibold text-zinc-400">
-                        {notification.symbol}
-                      </span>
-                    )}
                     {notification.actionUrl && (
-                      <span className="flex items-center gap-0.5 text-[10px] text-emerald-500">
+                      <span className="flex items-center gap-0.5 text-[10px] text-blue-600">
                         <ExternalLink className="h-2.5 w-2.5" />
                         View
                       </span>
@@ -209,7 +210,7 @@ export function NotificationPanel({ onClose }: NotificationPanelProps) {
           <Link
             href="/alerts"
             onClick={onClose}
-            className="flex items-center justify-center gap-1.5 text-xs font-medium text-emerald-500 hover:text-emerald-400 transition-colors"
+            className="flex items-center justify-center gap-1.5 text-xs font-medium text-blue-600 hover:text-blue-500 transition-colors"
           >
             View All Alert History
             <ExternalLink className="h-3 w-3" />

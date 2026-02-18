@@ -1,11 +1,10 @@
-const brokers = [
-  "Robinhood",
-  "Webull",
-  "Fidelity",
-  "Charles Schwab",
-  "TD Ameritrade",
-  "E*TRADE",
-  "Interactive Brokers",
+const protections = [
+  "Gmail & Outlook",
+  "iPhone & Android",
+  "Chrome & Safari",
+  "Amazon & eBay",
+  "190+ Data Brokers",
+  "All Major Banks",
 ];
 
 export function TrustedBySection() {
@@ -13,15 +12,15 @@ export function TrustedBySection() {
     <section className="py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <p className="text-center text-xs font-medium uppercase tracking-widest text-zinc-600">
-          Works alongside any broker
+          Monitors threats across your digital life
         </p>
         <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-          {brokers.map((broker) => (
+          {protections.map((item) => (
             <span
-              key={broker}
+              key={item}
               className="text-sm font-semibold text-zinc-500 transition-colors hover:text-zinc-300"
             >
-              {broker}
+              {item}
             </span>
           ))}
         </div>

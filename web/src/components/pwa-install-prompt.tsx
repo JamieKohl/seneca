@@ -39,7 +39,7 @@ export function PWAInstallPrompt() {
   if (!show) return null;
 
   return (
-    <div className="fixed bottom-20 left-6 z-[55] max-w-sm rounded-xl border border-emerald-500/20 bg-zinc-950 p-4 shadow-2xl shadow-black/50 animate-in slide-in-from-bottom-4 duration-300">
+    <div className="fixed bottom-20 left-6 z-[55] max-w-sm rounded-xl border border-blue-600/20 bg-zinc-950 p-4 shadow-2xl shadow-black/50 animate-in slide-in-from-bottom-4 duration-300">
       <button
         onClick={handleDismiss}
         className="absolute right-2 top-2 rounded-lg p-1 text-zinc-600 hover:text-zinc-400 transition-colors"
@@ -47,8 +47,8 @@ export function PWAInstallPrompt() {
         <X className="h-4 w-4" />
       </button>
       <div className="flex items-start gap-3">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10">
-          <Smartphone className="h-5 w-5 text-emerald-400" />
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-600/10">
+          <Smartphone className="h-5 w-5 text-blue-500" />
         </div>
         <div>
           <p className="text-sm font-semibold text-white">
@@ -59,7 +59,7 @@ export function PWAInstallPrompt() {
           </p>
           <button
             onClick={handleInstall}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-500 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-blue-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-600 transition-colors"
           >
             <Download className="h-3.5 w-3.5" />
             Install App

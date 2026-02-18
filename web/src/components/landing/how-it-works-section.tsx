@@ -1,26 +1,26 @@
-import { UserPlus, Wallet, Bell } from "lucide-react";
+import { Plug, Shield, PiggyBank } from "lucide-react";
 
 const steps = [
   {
-    icon: UserPlus,
+    icon: Plug,
     step: "01",
-    title: "Create Your Account",
+    title: "Connect",
     description:
-      "Sign up in seconds. No credit card required. No money goes into this app.",
+      "Sign up and tell Shield what to protect. Add your subscriptions, forward suspicious messages, and start privacy scans.",
   },
   {
-    icon: Wallet,
+    icon: Shield,
     step: "02",
-    title: "Log Your Positions",
+    title: "Shield Monitors",
     description:
-      "Tell us what stocks you own on Robinhood, Webull, or any broker — and how much you put in.",
+      "Our AI continuously watches for scams, forgotten subscriptions, data broker listings, and price manipulation — 24/7.",
   },
   {
-    icon: Bell,
+    icon: PiggyBank,
     step: "03",
-    title: "Get Broker Alerts",
+    title: "You Save",
     description:
-      "We\u0027ll notify you: \"Go on Robinhood and sell TSLA now\" — with profit estimates and reasoning.",
+      "Get instant alerts when threats are found. Cancel wasteful subscriptions, block scams, and reclaim your privacy — all from one dashboard.",
   },
 ];
 
@@ -33,7 +33,7 @@ export function HowItWorksSection() {
             How It Works
           </h2>
           <p className="mt-4 text-lg text-zinc-400">
-            Start getting alerts in under a minute.
+            Three steps to total protection.
           </p>
         </div>
 
@@ -45,9 +45,9 @@ export function HowItWorksSection() {
                 <div className="absolute top-10 left-[calc(50%+40px)] hidden h-px w-[calc(100%-80px)] bg-zinc-800 md:block" />
               )}
               <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl border border-zinc-800 bg-zinc-900/50">
-                <step.icon className="h-8 w-8 text-emerald-500" />
+                <step.icon className="h-8 w-8 text-blue-600" />
               </div>
-              <div className="mt-2 text-xs font-bold uppercase tracking-widest text-emerald-500">
+              <div className="mt-2 text-xs font-bold uppercase tracking-widest text-blue-600">
                 Step {step.step}
               </div>
               <h3 className="mt-3 text-xl font-semibold text-white">

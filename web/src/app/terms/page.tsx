@@ -82,7 +82,7 @@ export default function TermsPage() {
             <h2 className="text-lg font-semibold text-white mt-8 mb-3">9. Contact</h2>
             <p className="text-zinc-400 leading-relaxed">
               For questions about these Terms, contact us at{" "}
-              <a href="mailto:contact@kohlcorp.com" className="text-emerald-500 hover:text-emerald-400">
+              <a href="mailto:contact@kohlcorp.com" className="text-blue-600 hover:text-blue-500">
                 contact@kohlcorp.com
               </a>.
             </p>

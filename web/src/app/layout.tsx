@@ -1,6 +1,5 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import { ChatWidget } from "@/components/chat-widget";
 import { ToastContainer } from "@/components/ui/toast";
 import { CookieConsent } from "@/components/cookie-consent";
 import { PWAInstallPrompt } from "@/components/pwa-install-prompt";
@@ -12,37 +11,40 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  themeColor: "#2563EB",
+};
+
 export const metadata: Metadata = {
   title: {
-    default: "KohlCorp - AI-Powered Stock Predictions & Alerts",
-    template: "%s | KohlCorp",
+    default: "KohlCorp Shield - AI Consumer Protection",
+    template: "%s | KohlCorp Shield",
   },
   description:
-    "Get AI-powered buy, sell, and hold alerts with profit estimates. Real-time stock market predictions and news-driven insights. Never miss a trade again.",
+    "Your AI bodyguard for money & privacy. Shield fights scams, tracks subscriptions, protects your privacy, and catches price discrimination — automatically.",
   manifest: "/manifest.json",
-  themeColor: "#10b981",
   keywords: [
-    "stock alerts",
-    "AI trading",
-    "buy sell hold",
-    "stock predictions",
-    "market alerts",
-    "broker companion",
-    "Robinhood alerts",
-    "stock signals",
+    "scam protection",
+    "consumer protection",
+    "subscription tracker",
+    "privacy protection",
+    "price discrimination",
+    "AI security",
+    "fraud detection",
+    "data broker opt-out",
   ],
   openGraph: {
     type: "website",
-    title: "KohlCorp - AI-Powered Stock Predictions & Alerts",
+    title: "KohlCorp Shield - AI Consumer Protection",
     description:
-      "Get AI-powered buy, sell, and hold alerts. We tell you exactly when to open your broker and act.",
-    siteName: "KohlCorp",
+      "Your AI bodyguard for money & privacy. Stop scams, save on subscriptions, and protect your data.",
+    siteName: "KohlCorp Shield",
   },
   twitter: {
     card: "summary_large_image",
-    title: "KohlCorp - AI-Powered Stock Alerts",
+    title: "KohlCorp Shield - AI Consumer Protection",
     description:
-      "Get AI-powered buy, sell, and hold alerts with profit estimates.",
+      "Your AI bodyguard for money & privacy. Stop scams, save on subscriptions, and protect your data.",
   },
   robots: {
     index: true,
@@ -66,7 +68,6 @@ export default function RootLayout({
         <ErrorBoundary>
           {children}
         </ErrorBoundary>
-        <ChatWidget />
         <ToastContainer />
         <CookieConsent />
         <PWAInstallPrompt />

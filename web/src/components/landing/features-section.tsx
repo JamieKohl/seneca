@@ -1,48 +1,38 @@
 import {
-  Bell,
-  TrendingUp,
-  DollarSign,
-  Newspaper,
-  Brain,
-  Wallet,
+  ShieldAlert,
+  CreditCard,
+  UserX,
+  Search,
 } from "lucide-react";
 
 const features = [
   {
-    icon: Bell,
-    title: "Broker Action Alerts",
+    icon: ShieldAlert,
+    title: "Scam Firewall",
     description:
-      "\"Go on Robinhood and sell TSLA now\" — we tell you exactly when to open your broker and what to do.",
+      "Paste any suspicious text, email, or call transcript and our AI instantly analyzes it for red flags, phishing patterns, and known scam tactics.",
+    color: "text-red-400 bg-red-500/10",
   },
   {
-    icon: Wallet,
-    title: "Position Tracking",
+    icon: CreditCard,
+    title: "Subscription Hunter",
     description:
-      "Log what you own on Robinhood, Webull, or any broker. We track live prices and match your real positions.",
+      "Track every subscription you pay for. We flag forgotten or unused ones and show you exactly how much you can save each month.",
+    color: "text-amber-400 bg-amber-500/10",
   },
   {
-    icon: Newspaper,
-    title: "News-Driven Alerts",
+    icon: UserX,
+    title: "Privacy Autopilot",
     description:
-      "\"Tesla just launched a new product — go buy on Robinhood.\" We scan breaking news and tell you when to act.",
+      "We track 190+ data brokers that sell your personal information and guide you through opting out — then monitor for re-listings.",
+    color: "text-purple-400 bg-purple-500/10",
   },
   {
-    icon: DollarSign,
-    title: "Profit Estimates",
+    icon: Search,
+    title: "Price Watch",
     description:
-      "Every alert shows how much you could make or lose based on your actual position size. No guessing.",
-  },
-  {
-    icon: Brain,
-    title: "AI Predictions",
-    description:
-      "Machine learning models analyze patterns, sentiment, and fundamentals to predict where your stocks are headed.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Live Market Data",
-    description:
-      "Real-time prices for every stock in your portfolio. Always know what your broker positions are worth.",
+      "Monitor products for price discrimination. We detect when companies show you higher prices based on your browsing history or location.",
+    color: "text-blue-400 bg-blue-500/10",
   },
 ];
 
@@ -52,21 +42,21 @@ export function FeaturesSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-white sm:text-4xl">
-            Your AI Sidekick for Any Broker
+            Four Layers of Protection
           </h2>
           <p className="mt-4 text-lg text-zinc-400">
-            We watch the market. You trade on Robinhood, Webull, or wherever you invest.
+            Shield monitors threats to your money and privacy around the clock.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-16 grid gap-6 sm:grid-cols-2">
           {features.map((feature) => (
             <div
               key={feature.title}
               className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-6 transition-colors hover:border-zinc-700"
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/10">
-                <feature.icon className="h-5 w-5 text-emerald-500" />
+              <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${feature.color}`}>
+                <feature.icon className="h-5 w-5" />
               </div>
               <h3 className="mt-4 text-lg font-semibold text-white">
                 {feature.title}

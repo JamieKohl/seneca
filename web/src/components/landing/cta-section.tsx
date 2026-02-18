@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { Compass } from "lucide-react";
+import { Shield } from "lucide-react";
 
 const footerLinks = {
   Product: [
     { label: "Dashboard", href: "/dashboard" },
-    { label: "AI Signals", href: "/signals" },
-    { label: "Predictions", href: "/predictions" },
+    { label: "Scam Firewall", href: "/scams" },
+    { label: "Privacy Autopilot", href: "/privacy" },
     { label: "Pricing", href: "/checkout" },
   ],
   Company: [
@@ -15,9 +15,9 @@ const footerLinks = {
     { label: "Contact", href: "mailto:contact@kohlcorp.com" },
   ],
   Legal: [
-    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Terms of Service", href: "/terms" },
-    { label: "Disclaimer", href: "/terms#disclaimer" },
+    { label: "Security", href: "/terms#security" },
   ],
 };
 
@@ -28,18 +28,17 @@ export function CTASection() {
         {/* CTA */}
         <div className="text-center">
           <h2 className="text-3xl font-bold text-white sm:text-4xl">
-            Never Miss a Move on Your Broker
+            Stop Losing Money to Scams & Hidden Fees
           </h2>
           <p className="mt-4 text-lg text-zinc-400">
-            We watch. You trade. Get AI alerts that tell you exactly when to
-            open Robinhood and act.
+            Shield watches your back 24/7. Start your free protection today.
           </p>
           <div className="mt-8 flex justify-center gap-4">
             <Link
               href="/register"
-              className="rounded-lg bg-emerald-600 px-8 py-3 text-sm font-medium text-white hover:bg-emerald-700 transition-colors"
+              className="rounded-lg bg-blue-700 px-8 py-3 text-sm font-medium text-white hover:bg-blue-800 transition-colors"
             >
-              Get Started Free
+              Get Protected Free
             </Link>
             <Link
               href="/login"
@@ -56,14 +55,15 @@ export function CTASection() {
             {/* Brand */}
             <div>
               <Link href="/" className="flex items-center gap-2 mb-4">
-                <Compass className="h-6 w-6 text-emerald-500" />
+                <Shield className="h-6 w-6 text-blue-600" />
                 <span className="text-base font-bold text-white">
-                  KohlCorp
+                  KohlCorp Shield
                 </span>
               </Link>
               <p className="text-sm text-zinc-500 leading-relaxed">
-                AI-powered stock alerts that tell you exactly when to open your
-                broker and act. We watch the market so you don&apos;t have to.
+                AI-powered consumer protection that fights scams, tracks
+                subscriptions, removes your data from brokers, and catches
+                price discrimination.
               </p>
             </div>
 
@@ -95,8 +95,8 @@ export function CTASection() {
               &copy; {new Date().getFullYear()} KohlCorp. All rights reserved.
             </p>
             <p className="text-xs text-zinc-600">
-              KohlCorp does not provide financial advice. Past performance does
-              not guarantee future results.
+              KohlCorp Shield is a consumer protection tool. Always verify
+              suspicious communications independently.
             </p>
           </div>
         </footer>

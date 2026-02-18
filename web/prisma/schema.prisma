@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
@@ -8,94 +9,149 @@ datasource db {
 }
 
 model User {
-  id             String              @id @default(cuid())
-  email          String              @unique
+  id             String            @id @default(cuid())
+  email          String            @unique
   name           String?
   passwordHash   String
-  createdAt      DateTime            @default(now())
-  updatedAt      DateTime            @updatedAt
-  holdings       Holding[]
-  watchlistItems WatchlistItem[]
-  snapshots      PortfolioSnapshot[]
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  settings       UserSettings?
+  subscription   UserSubscription?
+  referralCode   String?           @unique
+  referralsMade  Referral[]        @relation("ReferrerRelation")
+  referredBy     Referral?         @relation("ReferredRelation")
+  scamReports    ScamReport[]
+  subscriptions  TrackedSubscription[]
+  dataBrokers    DataBroker[]
+  priceWatches   PriceWatch[]
+  alertLogs      AlertLog[]
 }
 
-model Holding {
-  id           String        @id @default(cuid())
-  userId       String
-  symbol       String
-  quantity     Float
-  avgCostBasis Float
-  purchaseDate DateTime
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  transactions Transaction[]
+model ScamReport {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String   // call, text, email
+  content     String   // the suspicious message content
+  sender      String?  // phone number, email address, etc.
+  riskScore   Int      // 0-100
+  riskLevel   String   // low, medium, high, critical
+  category    String?  // phishing, impersonation, lottery, tech_support, romance, investment, other
+  redFlags    String?  // JSON array of identified red flags
+  aiAnalysis  String?  // full AI analysis text
+  action      String?  // blocked, reported, ignored
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model TrackedSubscription {
+  id              String    @id @default(cuid())
+  userId          String
+  name            String    // e.g. "Netflix", "Spotify"
+  cost            Float     // monthly cost
+  billingCycle    String    @default("monthly") // monthly, yearly, weekly
+  renewalDate     DateTime?
+  status          String    @default("active") // active, paused, cancelled, flagged
+  category        String?   // entertainment, productivity, fitness, news, other
+  cancellationUrl String?
+  notes           String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
 
-model Transaction {
-  id        String   @id @default(cuid())
-  holdingId String
-  type      String   // BUY or SELL
-  quantity  Float
-  price     Float
-  date      DateTime
-  createdAt DateTime @default(now())
-  holding   Holding  @relation(fields: [holdingId], references: [id], onDelete: Cascade)
+model DataBroker {
+  id            String    @id @default(cuid())
+  userId        String
+  brokerName    String    // e.g. "Spokeo", "WhitePages", "BeenVerified"
+  status        String    @default("pending") // pending, submitted, confirmed, re-listed
+  submittedDate DateTime?
+  confirmedDate DateTime?
+  lastChecked   DateTime?
+  optOutUrl     String?
+  notes         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@index([holdingId])
+  @@index([userId])
+  @@unique([userId, brokerName])
 }
 
-model PortfolioSnapshot {
+model PriceWatch {
+  id             String   @id @default(cuid())
+  userId         String
+  productName    String
+  productUrl     String
+  currentPrice   Float?
+  lowestPrice    Float?
+  highestPrice   Float?
+  priceSnapshots String?  // JSON array of { price, date, context } objects
+  flagged        Boolean  @default(false) // flagged for suspicious price differences
+  notes          String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model AlertLog {
   id         String   @id @default(cuid())
   userId     String
-  totalValue Float
-  dayChange  Float
-  date       DateTime
+  type       String   // scam, subscription, privacy, price, system
+  title      String
+  body       String
+  actionable Boolean  @default(false)
+  actionUrl  String?
+  read       Boolean  @default(false)
   createdAt  DateTime @default(now())
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
-}
-
-model WatchlistItem {
-  id        String   @id @default(cuid())
-  userId    String
-  symbol    String
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([userId, symbol])
-  @@index([userId])
-}
-
-model Signal {
-  id            String   @id @default(cuid())
-  symbol        String
-  signalType    String   // BUY, SELL, HOLD
-  confidence    Float
-  reasoning     String
-  technicalData String?  // JSON string
-  sentimentScore Float?
-  createdAt     DateTime @default(now())
-  expiresAt     DateTime?
-
-  @@index([symbol])
   @@index([createdAt])
 }
 
-model CachedArticle {
-  id        String   @id @default(cuid())
-  symbol    String
-  headline  String
-  summary   String?
-  sentiment String?  // bullish, bearish, neutral
-  sentimentScore Float?
-  source    String?
-  url       String?
-  publishedAt DateTime?
-  createdAt DateTime @default(now())
+model UserSettings {
+  id                  String   @id @default(cuid())
+  userId              String   @unique
+  notifyScams         Boolean  @default(true)
+  notifySubscriptions Boolean  @default(true)
+  notifyPrivacy       Boolean  @default(true)
+  notifyPriceWatch    Boolean  @default(true)
+  quietHoursEnabled   Boolean  @default(false)
+  quietStart          String   @default("22:00")
+  quietEnd            String   @default("08:00")
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
 
-  @@index([symbol])
+model UserSubscription {
+  id               String    @id @default(cuid())
+  userId           String    @unique
+  plan             String    @default("free") // free | solo | family
+  status           String    @default("active") // active | trialing | canceled | expired
+  trialEndsAt      DateTime?
+  currentPeriodEnd DateTime?
+  canceledAt       DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Referral {
+  id         String   @id @default(cuid())
+  referrerId String
+  referredId String   @unique
+  status     String   @default("pending") // pending | active
+  createdAt  DateTime @default(now())
+  referrer   User     @relation("ReferrerRelation", fields: [referrerId], references: [id], onDelete: Cascade)
+  referred   User     @relation("ReferredRelation", fields: [referredId], references: [id], onDelete: Cascade)
+
+  @@index([referrerId])
 }

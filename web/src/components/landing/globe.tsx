@@ -123,7 +123,7 @@ export function Globe() {
   return (
     <div className="relative aspect-square w-full max-w-[600px] mx-auto">
       {/* Emerald radial glow behind globe */}
-      <div className="absolute inset-0 rounded-full bg-emerald-500/10 blur-3xl scale-75" />
+      <div className="absolute inset-0 rounded-full bg-blue-600/10 blur-3xl scale-75" />
       
       {/* Floating ticker labels */}
       <div className="absolute inset-0 pointer-events-none">
@@ -143,9 +143,9 @@ export function Globe() {
                 transform: "translate(-50%, -50%)",
               }}
             >
-              <div className="flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-zinc-900/80 backdrop-blur-sm px-2.5 py-1 shadow-lg shadow-emerald-500/10">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-[10px] font-bold text-emerald-400 tracking-wider">
+              <div className="flex items-center gap-1.5 rounded-full border border-blue-600/30 bg-zinc-900/80 backdrop-blur-sm px-2.5 py-1 shadow-lg shadow-blue-600/10">
+                <span className="h-1.5 w-1.5 rounded-full bg-blue-600 animate-pulse" />
+                <span className="text-[10px] font-bold text-blue-500 tracking-wider">
                   {ticker}
                 </span>
               </div>

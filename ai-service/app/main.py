@@ -1,22 +1,22 @@
-"""FastAPI application entry point for the AI Trader Service."""
+"""FastAPI application entry point for the Kohlcorp Shield AI Service."""
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .routers import analysis, signals, sentiment, health
+from .routers import health, scam
 
 app = FastAPI(
-    title="AI Trader Service",
-    version="1.0.0",
-    description="Microservice for stock analysis and trading signal generation.",
+    title="Kohlcorp Shield AI Service",
+    version="2.0.0",
+    description="Microservice for scam analysis and consumer protection.",
 )
 
 # ---------------------------------------------------------------------------
-# CORS middleware -- allow all origins during development
+# CORS middleware
 # ---------------------------------------------------------------------------
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://kohlcorp.com", "http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -25,9 +25,7 @@ app.add_middleware(
 # ---------------------------------------------------------------------------
 # Include routers
 # ---------------------------------------------------------------------------
-app.include_router(analysis.router)
-app.include_router(signals.router)
-app.include_router(sentiment.router)
+app.include_router(scam.router)
 app.include_router(health.router)
 
 
@@ -36,9 +34,9 @@ app.include_router(health.router)
 # ---------------------------------------------------------------------------
 @app.get("/")
 async def root() -> dict[str, str]:
-    """Return a welcome message for the AI Trader Service."""
+    """Return a welcome message for the Shield AI Service."""
     return {
-        "message": "Welcome to the AI Trader Service",
+        "message": "Welcome to the Kohlcorp Shield AI Service",
         "docs": "/docs",
-        "version": "1.0.0",
+        "version": "2.0.0",
     }

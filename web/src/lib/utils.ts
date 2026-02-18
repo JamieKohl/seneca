@@ -34,28 +34,6 @@ export function getChangeColor(value: number): string {
   return "text-gray-500";
 }
 
-export function getSentimentColor(sentiment: string): string {
-  switch (sentiment) {
-    case "bullish":
-      return "text-green-500 bg-green-500/10";
-    case "bearish":
-      return "text-red-500 bg-red-500/10";
-    default:
-      return "text-gray-500 bg-gray-500/10";
-  }
-}
-
-export function getSignalColor(signal: string): string {
-  switch (signal) {
-    case "BUY":
-      return "text-green-500 bg-green-500/10 border-green-500/20";
-    case "SELL":
-      return "text-red-500 bg-red-500/10 border-red-500/20";
-    default:
-      return "text-yellow-500 bg-yellow-500/10 border-yellow-500/20";
-  }
-}
-
 export function timeAgo(date: string | Date): string {
   const seconds = Math.floor(
     (new Date().getTime() - new Date(date).getTime()) / 1000

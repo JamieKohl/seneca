@@ -20,7 +20,7 @@ export function StatCard({
   changeValue = 0,
   icon: Icon,
   description,
-  iconColor = "text-emerald-500 bg-emerald-500/10",
+  iconColor = "text-blue-600 bg-blue-600/10",
 }: StatCardProps) {
   return (
     <div className="group rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 transition-all hover:border-zinc-700 hover:bg-zinc-900/80">

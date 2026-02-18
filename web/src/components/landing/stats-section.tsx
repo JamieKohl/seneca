@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 
 const stats = [
-  { label: "Alerts Sent", target: 1200000, suffix: "+", prefix: "" },
-  { label: "Prediction Accuracy", target: 84, suffix: "%", prefix: "" },
-  { label: "Stocks Tracked", target: 5000, suffix: "+", prefix: "" },
-  { label: "Active Users", target: 10000, suffix: "+", prefix: "" },
+  { label: "Fraud Blocked", target: 850000, suffix: "+", prefix: "$" },
+  { label: "Subscriptions Cancelled", target: 42000, suffix: "+", prefix: "" },
+  { label: "Data Brokers Opted Out", target: 190, suffix: "+", prefix: "" },
+  { label: "Protected Users", target: 15000, suffix: "+", prefix: "" },
 ];
 
 function formatNum(n: number): string {
@@ -30,7 +30,6 @@ function AnimatedStat({ target, suffix, prefix }: { target: number; suffix: stri
           const animate = (now: number) => {
             const elapsed = now - start;
             const progress = Math.min(elapsed / duration, 1);
-            // Ease out cubic
             const eased = 1 - Math.pow(1 - progress, 3);
             setValue(Math.round(eased * target));
             if (progress < 1) requestAnimationFrame(animate);
@@ -45,7 +44,7 @@ function AnimatedStat({ target, suffix, prefix }: { target: number; suffix: stri
   }, [target]);
 
   return (
-    <div ref={ref} className="text-3xl font-bold text-emerald-500 sm:text-4xl tabular-nums">
+    <div ref={ref} className="text-3xl font-bold text-blue-600 sm:text-4xl tabular-nums">
       {prefix}{formatNum(value)}{suffix}
     </div>
   );

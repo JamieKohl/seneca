@@ -2,51 +2,48 @@
 
 import { useState, useEffect } from "react";
 import {
-  Compass,
+  Shield,
   ArrowRight,
-  Briefcase,
+  ShieldAlert,
   Bell,
-  Eye,
-  ChevronRight,
-  Check,
+  CreditCard,
   Sparkles,
 } from "lucide-react";
 
 const steps = [
   {
-    icon: Compass,
-    title: "Welcome to KohlCorp",
+    icon: Shield,
+    title: "Welcome to Kohlcorp Shield",
     description:
-      "Your AI-powered broker companion. We watch the market 24/7 and tell you exactly when to open your broker and act.",
-    color: "text-emerald-400 bg-emerald-500/10",
+      "Your AI-powered consumer protection platform. We fight scams, track subscriptions, protect your privacy, and catch price discrimination — automatically.",
+    color: "text-blue-500 bg-blue-600/10",
   },
   {
-    icon: Briefcase,
-    title: "Log Your Positions",
+    icon: ShieldAlert,
+    title: "Scam Firewall",
     description:
-      "Tell us what stocks you own on Robinhood, Webull, or any broker. We never connect to your account — all data is self-reported.",
-    color: "text-blue-400 bg-blue-500/10",
+      "Paste any suspicious text, email, or call transcript and our AI will instantly analyze it for red flags and tell you if it's a scam.",
+    color: "text-red-400 bg-red-500/10",
   },
   {
-    icon: Eye,
-    title: "Build Your Watchlist",
+    icon: CreditCard,
+    title: "Track Your Subscriptions",
     description:
-      "Add stocks you're interested in buying. Our AI will watch them for entry opportunities and alert you when it's time to act.",
-    color: "text-violet-400 bg-violet-500/10",
+      "Add your subscriptions so Shield can flag unused ones and help you save money. The average person wastes $133/month on forgotten subscriptions.",
+    color: "text-amber-400 bg-amber-500/10",
   },
   {
     icon: Bell,
-    title: "Get Smart Alerts",
+    title: "Get Protected",
     description:
-      "Receive buy, sell, and hold alerts with confidence scores and reasoning. Each alert tells you exactly what to do on your broker.",
-    color: "text-amber-400 bg-amber-500/10",
+      "Shield monitors threats 24/7 and sends you alerts when action is needed. You'll also see your protection score on the dashboard.",
+    color: "text-blue-400 bg-blue-500/10",
   },
 ];
 
 export function OnboardingFlow() {
   const [show, setShow] = useState(false);
   const [step, setStep] = useState(0);
-  const [selectedBroker, setSelectedBroker] = useState("");
 
   useEffect(() => {
     const dismissed = localStorage.getItem("kohlcorp-onboarding-complete");
@@ -75,7 +72,7 @@ export function OnboardingFlow() {
             <div
               key={i}
               className={`h-1 flex-1 rounded-full transition-colors ${
-                i <= step ? "bg-emerald-500" : "bg-zinc-800"
+                i <= step ? "bg-blue-600" : "bg-zinc-800"
               }`}
             />
           ))}
@@ -88,26 +85,6 @@ export function OnboardingFlow() {
           </div>
           <h2 className="text-xl font-bold text-white mb-3">{currentStep.title}</h2>
           <p className="text-sm text-zinc-400 leading-relaxed">{currentStep.description}</p>
-
-          {/* Broker selection on step 1 */}
-          {step === 1 && (
-            <div className="mt-6 grid grid-cols-2 gap-2">
-              {["Robinhood", "Webull", "Fidelity", "Other"].map((broker) => (
-                <button
-                  key={broker}
-                  onClick={() => setSelectedBroker(broker)}
-                  className={`rounded-lg border px-3 py-2.5 text-sm font-medium transition-all ${
-                    selectedBroker === broker
-                      ? "border-emerald-500/50 bg-emerald-500/10 text-emerald-400"
-                      : "border-zinc-700 text-zinc-400 hover:border-zinc-600"
-                  }`}
-                >
-                  {selectedBroker === broker && <Check className="inline h-3.5 w-3.5 mr-1" />}
-                  {broker}
-                </button>
-              ))}
-            </div>
-          )}
         </div>
 
         {/* Actions */}
@@ -126,12 +103,12 @@ export function OnboardingFlow() {
                 setStep(step + 1);
               }
             }}
-            className="flex items-center gap-2 rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-500 transition-colors"
+            className="flex items-center gap-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-600 transition-colors"
           >
             {isLastStep ? (
               <>
                 <Sparkles className="h-4 w-4" />
-                Get Started
+                Get Protected
               </>
             ) : (
               <>

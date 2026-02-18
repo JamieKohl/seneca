@@ -49,8 +49,8 @@ export const toast = {
 const toastConfig = {
   success: {
     icon: CheckCircle2,
-    bg: "bg-emerald-500/10 border-emerald-500/20",
-    iconColor: "text-emerald-500",
+    bg: "bg-blue-600/10 border-blue-600/20",
+    iconColor: "text-blue-600",
   },
   error: {
     icon: AlertCircle,

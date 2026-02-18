@@ -38,7 +38,7 @@ export function CookieConsent() {
             </p>
             <Link
               href="/privacy"
-              className="text-xs text-emerald-500 hover:text-emerald-400 transition-colors"
+              className="text-xs text-blue-600 hover:text-blue-500 transition-colors"
             >
               Learn more in our Privacy Policy
             </Link>
@@ -53,7 +53,7 @@ export function CookieConsent() {
           </button>
           <button
             onClick={accept}
-            className="rounded-lg bg-emerald-600 px-4 py-2 text-xs font-medium text-white hover:bg-emerald-500 transition-colors"
+            className="rounded-lg bg-blue-700 px-4 py-2 text-xs font-medium text-white hover:bg-blue-600 transition-colors"
           >
             Accept All
           </button>

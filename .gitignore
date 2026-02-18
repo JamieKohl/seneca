@@ -34,3 +34,4 @@ prisma/dev.db
 # Python
 *.egg-info/
 .eggs/
+web/nul

@@ -1,117 +1,119 @@
-export interface StockQuote {
-  symbol: string;
-  price: number;
-  change: number;
-  changePercent: number;
-  high: number;
-  low: number;
-  open: number;
-  previousClose: number;
-  volume: number;
-  timestamp: number;
-}
-
-export interface Candle {
-  time: number;
-  open: number;
-  high: number;
-  low: number;
-  close: number;
-  volume: number;
-}
-
-export interface StockSearchResult {
-  symbol: string;
-  description: string;
-  type: string;
-}
-
-export interface PortfolioHolding {
+export interface ScamReport {
   id: string;
-  symbol: string;
-  quantity: number;
-  avgCostBasis: number;
-  purchaseDate: string;
-  currentPrice?: number;
-  marketValue?: number;
-  totalCost?: number;
-  pnl?: number;
-  pnlPercent?: number;
-  dayChange?: number;
-  dayChangePercent?: number;
-}
-
-export interface PortfolioSummary {
-  totalValue: number;
-  totalCost: number;
-  totalPnl: number;
-  totalPnlPercent: number;
-  dayChange: number;
-  dayChangePercent: number;
-  holdingsCount: number;
-}
-
-export interface Signal {
-  id: string;
-  symbol: string;
-  signalType: "BUY" | "SELL" | "HOLD";
-  confidence: number;
-  reasoning: string;
-  technicalData?: TechnicalData;
-  sentimentScore?: number;
+  type: "call" | "text" | "email";
+  content: string;
+  sender?: string;
+  riskScore: number;
+  riskLevel: "low" | "medium" | "high" | "critical";
+  category?: string;
+  redFlags?: string[];
+  aiAnalysis?: string;
+  action?: string;
   createdAt: string;
-  expiresAt?: string;
 }
 
-export interface TechnicalData {
-  rsi: number;
-  macd: { value: number; signal: number; histogram: number };
-  bollingerBands: { upper: number; middle: number; lower: number };
-  sma20: number;
-  sma50: number;
-  ema12: number;
-  ema26: number;
-  volume: number;
-  avgVolume: number;
-}
-
-export interface NewsArticle {
+export interface TrackedSubscription {
   id: string;
-  symbol: string;
-  headline: string;
-  summary?: string;
-  sentiment?: "bullish" | "bearish" | "neutral";
-  sentimentScore?: number;
-  source?: string;
-  url?: string;
-  publishedAt?: string;
+  name: string;
+  cost: number;
+  billingCycle: "monthly" | "yearly" | "weekly";
+  renewalDate?: string;
+  status: "active" | "paused" | "cancelled" | "flagged";
+  category?: string;
+  cancellationUrl?: string;
+  notes?: string;
+  createdAt: string;
 }
 
-export interface WatchlistItem {
+export interface DataBroker {
   id: string;
-  symbol: string;
-  quote?: StockQuote;
+  brokerName: string;
+  status: "pending" | "submitted" | "confirmed" | "re-listed";
+  submittedDate?: string;
+  confirmedDate?: string;
+  lastChecked?: string;
+  optOutUrl?: string;
+  notes?: string;
+  createdAt: string;
+}
+
+export interface PriceWatch {
+  id: string;
+  productName: string;
+  productUrl: string;
+  currentPrice?: number;
+  lowestPrice?: number;
+  highestPrice?: number;
+  priceSnapshots?: PriceSnapshot[];
+  flagged: boolean;
+  notes?: string;
+  createdAt: string;
+}
+
+export interface PriceSnapshot {
+  price: number;
+  date: string;
+  context?: string;
+}
+
+export interface AlertLog {
+  id: string;
+  type: "scam" | "subscription" | "privacy" | "price" | "system";
+  title: string;
+  body: string;
+  actionable: boolean;
+  actionUrl?: string;
+  read: boolean;
+  createdAt: string;
 }
 
 export interface Notification {
   id: string;
-  type: "signal" | "price" | "news" | "system";
+  type: "scam" | "subscription" | "privacy" | "price" | "system";
   title: string;
   body: string;
-  symbol?: string;
   read: boolean;
   createdAt: string;
   actionUrl?: string;
 }
 
-export interface AIAnalysis {
-  symbol: string;
-  signal: "BUY" | "SELL" | "HOLD";
-  confidence: number;
-  reasoning: string;
-  technicalSummary: string;
-  sentimentSummary: string;
-  riskLevel: "LOW" | "MEDIUM" | "HIGH";
-  priceTarget?: number;
-  stopLoss?: number;
+export interface DashboardStats {
+  protectionScore: number;
+  scamsBlocked: number;
+  moneySaved: number;
+  brokersOptedOut: number;
+  activeSubscriptions: number;
+  monthlySpend: number;
+  recentAlerts: AlertLog[];
+}
+
+export interface ScamAnalysisResult {
+  riskScore: number;
+  riskLevel: "low" | "medium" | "high" | "critical";
+  category: string;
+  redFlags: string[];
+  analysis: string;
+  recommendedAction: string;
+}
+
+export interface UserSubscriptionData {
+  id: string;
+  plan: "free" | "solo" | "family";
+  status: "active" | "trialing" | "canceled" | "expired";
+  trialEndsAt?: string;
+  currentPeriodEnd?: string;
+  canceledAt?: string;
+}
+
+export interface UserSettingsData {
+  notifications: {
+    scams: boolean;
+    subscriptions: boolean;
+    privacy: boolean;
+    priceWatch: boolean;
+  };
+  quietHoursEnabled: boolean;
+  quietStart: string;
+  quietEnd: string;
+  plan: string;
 }

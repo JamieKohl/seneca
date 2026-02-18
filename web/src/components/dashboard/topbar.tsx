@@ -1,14 +1,12 @@
 "use client";
 
-import { Bell, Zap } from "lucide-react";
+import { Bell, ShieldAlert } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
 import { NotificationPanel } from "./notification-panel";
 import { UserMenu } from "./user-menu";
-import { SearchAutocomplete } from "./search-autocomplete";
-import { useMarketStatus } from "@/hooks/useMarketStatus";
 
 export function Topbar() {
   const { sidebarOpen, notifications } = useStore();
@@ -16,7 +14,6 @@ export function Topbar() {
   const notifRef = useRef<HTMLDivElement>(null);
 
   const unreadCount = notifications.filter((n) => !n.read).length;
-  const marketStatus = useMarketStatus();
 
   // Close notification panel on outside click
   useEffect(() => {
@@ -40,34 +37,21 @@ export function Topbar() {
       )}
     >
       <div className="flex h-full items-center justify-between px-6">
-        {/* Search */}
-        <SearchAutocomplete />
+        {/* Shield status */}
+        <div className="flex items-center gap-2 rounded-full border border-blue-600/20 bg-blue-600/5 px-3 py-1.5 text-xs">
+          <div className="h-2 w-2 rounded-full bg-blue-600 animate-pulse" />
+          <span className="text-blue-500 font-medium">Shield Active</span>
+        </div>
 
         {/* Right side */}
         <div className="flex items-center gap-2">
-          {/* Market status pill */}
-          <div
-            className="hidden sm:flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/50 px-3 py-1.5 text-xs"
-            title={marketStatus.nextEvent}
-          >
-            <div
-              className={cn(
-                "h-2 w-2 rounded-full",
-                marketStatus.isOpen
-                  ? "bg-emerald-500 animate-pulse"
-                  : "bg-zinc-500"
-              )}
-            />
-            <span className="text-zinc-400">{marketStatus.label}</span>
-          </div>
-
-          {/* Quick generate */}
+          {/* Quick analyze */}
           <Link
-            href="/signals"
-            className="hidden md:flex items-center gap-1.5 rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-emerald-500/50 hover:text-emerald-400 transition-colors"
+            href="/scams"
+            className="hidden md:flex items-center gap-1.5 rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 py-1.5 text-xs font-medium text-zinc-400 hover:border-blue-600/50 hover:text-blue-500 transition-colors"
           >
-            <Zap className="h-3.5 w-3.5" />
-            Generate Signals
+            <ShieldAlert className="h-3.5 w-3.5" />
+            Analyze Scam
           </Link>
 
           {/* Notifications */}
@@ -81,7 +65,7 @@ export function Topbar() {
             >
               <Bell className="h-5 w-5" />
               {unreadCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-emerald-500 px-1 text-[10px] font-bold text-white ring-2 ring-zinc-950">
+                <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-blue-600 px-1 text-[10px] font-bold text-white ring-2 ring-zinc-950">
                   {unreadCount > 9 ? "9+" : unreadCount}
                 </span>
               )}

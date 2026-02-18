@@ -4,85 +4,64 @@ import type { Notification } from "@/types";
 const SAMPLE_NOTIFICATIONS: Notification[] = [
   {
     id: "n1",
-    type: "signal",
-    title: "BUY Signal: NVDA",
-    body: "AI detected strong buy opportunity. Open your broker and buy NVDA now.",
-    symbol: "NVDA",
+    type: "scam",
+    title: "Phishing Attempt Blocked",
+    body: "We detected a suspicious email claiming to be from your bank. Risk score: 92/100.",
     read: false,
     createdAt: new Date(Date.now() - 5 * 60_000).toISOString(),
-    actionUrl: "/signals",
+    actionUrl: "/scams",
   },
   {
     id: "n2",
-    type: "price",
-    title: "TSLA hit $248.50",
-    body: "Tesla crossed your price alert threshold of $245. Up 3.2% today.",
-    symbol: "TSLA",
+    type: "subscription",
+    title: "Unused Subscription Found",
+    body: "You haven't used your Audible subscription in 3 months. Save $14.95/mo by cancelling.",
     read: false,
     createdAt: new Date(Date.now() - 22 * 60_000).toISOString(),
-    actionUrl: "/portfolio",
+    actionUrl: "/subscriptions",
   },
   {
     id: "n3",
-    type: "signal",
-    title: "SELL Signal: AMZN",
-    body: "AI recommends selling AMZN. Confidence: 78%. Open Robinhood to act.",
-    symbol: "AMZN",
+    type: "privacy",
+    title: "Data Broker Re-listing",
+    body: "Spokeo has re-listed your personal information. We recommend opting out again.",
     read: false,
     createdAt: new Date(Date.now() - 45 * 60_000).toISOString(),
-    actionUrl: "/signals",
+    actionUrl: "/privacy",
   },
   {
     id: "n4",
-    type: "news",
-    title: "Breaking: Fed Rate Decision",
-    body: "Federal Reserve holds rates steady. Markets reacting positively.",
+    type: "price",
+    title: "Price Discrimination Detected",
+    body: "Sony WH-1000XM5 is showing $50 higher than the baseline price for your session.",
     read: false,
     createdAt: new Date(Date.now() - 2 * 3600_000).toISOString(),
-    actionUrl: "/news",
+    actionUrl: "/price-watch",
   },
   {
     id: "n5",
-    type: "price",
-    title: "AAPL earnings beat",
-    body: "Apple reported $1.52 EPS vs $1.43 expected. After-hours up 4.1%.",
-    symbol: "AAPL",
+    type: "scam",
+    title: "Robocall Pattern Detected",
+    body: "3 calls from suspected scam numbers in the last hour. Auto-block enabled.",
     read: true,
     createdAt: new Date(Date.now() - 5 * 3600_000).toISOString(),
-    actionUrl: "/news",
+    actionUrl: "/scams",
   },
   {
     id: "n6",
-    type: "signal",
-    title: "HOLD Signal: MSFT",
-    body: "AI recommends holding MSFT. Confidence: 82%. No action needed right now.",
-    symbol: "MSFT",
-    read: true,
-    createdAt: new Date(Date.now() - 8 * 3600_000).toISOString(),
-    actionUrl: "/signals",
-  },
-  {
-    id: "n7",
     type: "system",
-    title: "Welcome to KohlCorp!",
-    body: "Your account is set up. Add your broker positions to start getting alerts.",
+    title: "Welcome to Kohlcorp Shield!",
+    body: "Your account is protected. Start by analyzing a suspicious message or tracking your subscriptions.",
     read: true,
     createdAt: new Date(Date.now() - 24 * 3600_000).toISOString(),
-    actionUrl: "/portfolio",
+    actionUrl: "/dashboard",
   },
 ];
 
 interface AppState {
-  // State
-  selectedSymbol: string;
-  watchlist: string[];
   sidebarOpen: boolean;
   notifications: Notification[];
 
-  // Actions
-  setSelectedSymbol: (symbol: string) => void;
-  addToWatchlist: (symbol: string) => void;
-  removeFromWatchlist: (symbol: string) => void;
   toggleSidebar: () => void;
   markNotificationRead: (id: string) => void;
   markAllNotificationsRead: () => void;
@@ -90,28 +69,8 @@ interface AppState {
 }
 
 export const useStore = create<AppState>((set) => ({
-  // Default state
-  selectedSymbol: "AAPL",
-  watchlist: ["AAPL", "GOOGL", "MSFT", "TSLA", "AMZN"],
   sidebarOpen: true,
   notifications: SAMPLE_NOTIFICATIONS,
-
-  // Actions
-  setSelectedSymbol: (symbol: string) =>
-    set({ selectedSymbol: symbol }),
-
-  addToWatchlist: (symbol: string) =>
-    set((state) => {
-      if (state.watchlist.includes(symbol)) {
-        return state;
-      }
-      return { watchlist: [...state.watchlist, symbol] };
-    }),
-
-  removeFromWatchlist: (symbol: string) =>
-    set((state) => ({
-      watchlist: state.watchlist.filter((s) => s !== symbol),
-    })),
 
   toggleSidebar: () =>
     set((state) => ({ sidebarOpen: !state.sidebarOpen })),

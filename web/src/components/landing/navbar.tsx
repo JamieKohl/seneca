@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Compass, Menu, X } from "lucide-react";
+import { Shield, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -34,8 +34,8 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <Compass className="h-7 w-7 text-emerald-500" />
-            <span className="text-lg font-bold text-white">KohlCorp</span>
+            <Shield className="h-7 w-7 text-blue-600" />
+            <span className="text-lg font-bold text-white">KohlCorp Shield</span>
           </Link>
 
           {/* Desktop nav links */}
@@ -61,9 +61,9 @@ export function Navbar() {
             </Link>
             <Link
               href="/register"
-              className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700 transition-colors"
+              className="rounded-lg bg-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-blue-800 transition-colors"
             >
-              Get Started
+              Get Protected
             </Link>
           </div>
 
@@ -106,9 +106,9 @@ export function Navbar() {
               <Link
                 href="/register"
                 onClick={() => setMobileOpen(false)}
-                className="rounded-lg bg-emerald-600 px-4 py-2.5 text-center text-sm font-medium text-white hover:bg-emerald-700 transition-colors"
+                className="rounded-lg bg-blue-700 px-4 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 transition-colors"
               >
-                Get Started
+                Get Protected
               </Link>
             </div>
           </div>
