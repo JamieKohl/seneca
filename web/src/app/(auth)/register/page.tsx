@@ -3,12 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Compass, UserPlus, Eye, EyeOff, ArrowRight, Check } from "lucide-react";
+import { Shield, UserPlus, Eye, EyeOff, ArrowRight, Check } from "lucide-react";
 
 const features = [
-  "AI-powered buy/sell/hold alerts",
-  "Works with any broker",
-  "Real-time market data",
+  "AI-powered scam detection",
+  "Subscription tracking & savings",
+  "Data broker opt-out monitoring",
   "Free forever — upgrade when ready",
 ];
 
@@ -51,17 +51,17 @@ export default function RegisterPage() {
     <div className="relative flex min-h-screen items-center justify-center bg-zinc-950 p-4 overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 bg-grid opacity-30" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-emerald-500/5 blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-blue-600/5 blur-3xl" />
 
       <div className="relative w-full max-w-md space-y-8">
         {/* Logo */}
         <div className="text-center">
           <Link href="/" className="inline-flex items-center justify-center gap-2 group">
-            <Compass className="h-10 w-10 text-emerald-500 group-hover:rotate-45 transition-transform duration-500" />
-            <span className="text-2xl font-bold text-white">KohlCorp</span>
+            <Shield className="h-10 w-10 text-blue-600 group-hover:rotate-45 transition-transform duration-500" />
+            <span className="text-2xl font-bold text-white">KohlCorp Shield</span>
           </Link>
           <p className="mt-2 text-sm text-zinc-400">
-            Start getting AI alerts for your broker in under 60 seconds
+            Start protecting your money and privacy in under 60 seconds
           </p>
         </div>
 
@@ -71,7 +71,7 @@ export default function RegisterPage() {
           <div className="mb-6 flex flex-wrap gap-x-4 gap-y-1">
             {features.map((f) => (
               <span key={f} className="flex items-center gap-1 text-[10px] text-zinc-500">
-                <Check className="h-3 w-3 text-emerald-500" />
+                <Check className="h-3 w-3 text-blue-600" />
                 {f}
               </span>
             ))}
@@ -93,7 +93,7 @@ export default function RegisterPage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Your name"
-                className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-2.5 text-sm text-white placeholder-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-colors"
+                className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-2.5 text-sm text-white placeholder-zinc-500 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600 transition-colors"
               />
             </div>
             <div>
@@ -106,7 +106,7 @@ export default function RegisterPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
                 required
-                className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-2.5 text-sm text-white placeholder-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-colors"
+                className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-2.5 text-sm text-white placeholder-zinc-500 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600 transition-colors"
               />
             </div>
             <div>
@@ -121,7 +121,7 @@ export default function RegisterPage() {
                   placeholder="Min 8 characters"
                   required
                   minLength={8}
-                  className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-2.5 pr-10 text-sm text-white placeholder-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-colors"
+                  className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-2.5 pr-10 text-sm text-white placeholder-zinc-500 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600 transition-colors"
                 />
                 <button
                   type="button"
@@ -135,7 +135,7 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={loading}
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 hover:bg-emerald-500 disabled:opacity-50 transition-all"
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-700 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 hover:bg-blue-600 disabled:opacity-50 transition-all"
             >
               {loading ? (
                 <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />

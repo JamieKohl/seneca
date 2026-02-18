@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import {
   User,
   Settings,
@@ -17,13 +18,13 @@ const menuItems = [
     label: "Settings",
     href: "/settings",
     icon: Settings,
-    description: "Account & broker preferences",
+    description: "Account & notifications",
   },
   {
-    label: "Upgrade to Pro",
+    label: "Upgrade to Solo",
     href: "/checkout",
     icon: Crown,
-    description: "Unlimited alerts & positions",
+    description: "Full protection for $9.99/mo",
     highlight: true,
   },
   {
@@ -35,6 +36,7 @@ const menuItems = [
 ];
 
 export function UserMenu() {
+  const { data: session } = useSession();
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -56,8 +58,8 @@ export function UserMenu() {
       <button
         onClick={() => setOpen(!open)}
         className={cn(
-          "flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20 transition-colors",
-          open && "ring-2 ring-emerald-500/30"
+          "flex h-8 w-8 items-center justify-center rounded-full bg-blue-600/10 text-blue-600 hover:bg-blue-600/20 transition-colors",
+          open && "ring-2 ring-blue-600/30"
         )}
       >
         <User className="h-4 w-4" />
@@ -68,11 +70,11 @@ export function UserMenu() {
           {/* User info */}
           <div className="border-b border-zinc-800 px-4 py-3">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/10">
-                <User className="h-5 w-5 text-emerald-500" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600/10">
+                <User className="h-5 w-5 text-blue-600" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-white">Trader</p>
+                <p className="text-sm font-semibold text-white">{session?.user?.name || "User"}</p>
                 <p className="text-xs text-zinc-500">Free Plan</p>
               </div>
             </div>
@@ -87,14 +89,14 @@ export function UserMenu() {
                 onClick={() => setOpen(false)}
                 className={cn(
                   "flex items-center gap-3 px-4 py-2.5 transition-colors hover:bg-zinc-900",
-                  item.highlight && "bg-emerald-500/[0.03]"
+                  item.highlight && "bg-blue-600/[0.03]"
                 )}
               >
                 <div
                   className={cn(
                     "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg",
                     item.highlight
-                      ? "bg-emerald-500/10 text-emerald-400"
+                      ? "bg-blue-600/10 text-blue-500"
                       : "bg-zinc-800 text-zinc-400"
                   )}
                 >
@@ -104,7 +106,7 @@ export function UserMenu() {
                   <p
                     className={cn(
                       "text-sm font-medium",
-                      item.highlight ? "text-emerald-400" : "text-white"
+                      item.highlight ? "text-blue-500" : "text-white"
                     )}
                   >
                     {item.label}
