@@ -2,11 +2,11 @@ import Link from "next/link";
 import { Shield } from "lucide-react";
 
 const footerLinks = {
-  Product: [
-    { label: "Dashboard", href: "/dashboard" },
-    { label: "Scam Firewall", href: "/scams" },
-    { label: "Privacy Autopilot", href: "/privacy" },
-    { label: "Pricing", href: "/checkout" },
+  Platform: [
+    { label: "Threat Dashboard", href: "/dashboard" },
+    { label: "Fraud Detection", href: "/scams" },
+    { label: "Privacy Monitor", href: "/privacy" },
+    { label: "Coverage Plans", href: "/checkout" },
   ],
   Company: [
     { label: "About", href: "/about" },
@@ -28,17 +28,19 @@ export function CTASection() {
         {/* CTA */}
         <div className="text-center">
           <h2 className="text-3xl font-bold text-white sm:text-4xl">
-            Stop Losing Money to Scams & Hidden Fees
+            Every Day Without Protection Costs You Money
           </h2>
           <p className="mt-4 text-lg text-zinc-400">
-            Shield watches your back 24/7. Start your free protection today.
+            The average unprotected consumer loses{" "}
+            <span className="text-red-400 font-bold font-data">$34 every day</span>{" "}
+            to fraud, subscription waste, and price manipulation.
           </p>
           <div className="mt-8 flex justify-center gap-4">
             <Link
               href="/register"
               className="rounded-lg bg-blue-700 px-8 py-3 text-sm font-medium text-white hover:bg-blue-800 transition-colors"
             >
-              Get Protected Free
+              Start Monitoring
             </Link>
             <Link
               href="/login"
@@ -56,21 +58,21 @@ export function CTASection() {
             <div>
               <Link href="/" className="flex items-center gap-2 mb-4">
                 <Shield className="h-6 w-6 text-blue-600" />
-                <span className="text-base font-bold text-white">
-                  KohlCorp Shield
+                <span className="text-base font-bold text-white tracking-tight">
+                  KOHLCORP <span className="text-blue-500">SHIELD</span>
                 </span>
               </Link>
               <p className="text-sm text-zinc-500 leading-relaxed">
-                AI-powered consumer protection that fights scams, tracks
-                subscriptions, removes your data from brokers, and catches
-                price discrimination.
+                Consumer threat intelligence and automated protection.
+                Real-time fraud detection, financial monitoring, and data broker
+                surveillance.
               </p>
             </div>
 
             {/* Link columns */}
             {Object.entries(footerLinks).map(([category, links]) => (
               <div key={category}>
-                <h4 className="text-sm font-semibold text-white mb-3">
+                <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-3">
                   {category}
                 </h4>
                 <ul className="space-y-2">
@@ -95,7 +97,7 @@ export function CTASection() {
               &copy; {new Date().getFullYear()} KohlCorp. All rights reserved.
             </p>
             <p className="text-xs text-zinc-600">
-              KohlCorp Shield is a consumer protection tool. Always verify
+              KohlCorp Shield is a consumer threat intelligence platform. Always verify
               suspicious communications independently.
             </p>
           </div>

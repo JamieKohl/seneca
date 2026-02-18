@@ -3,46 +3,46 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 import createGlobe from "cobe";
 
-interface CompanyMarker {
+interface ThreatMarker {
   name: string;
-  ticker: string;
+  label: string;
   location: [number, number];
 }
 
-const COMPANIES: CompanyMarker[] = [
-  { name: "Apple", ticker: "AAPL", location: [37.3349, -122.009] },
-  { name: "Tesla", ticker: "TSLA", location: [30.2218, -97.7737] },
-  { name: "Google", ticker: "GOOGL", location: [37.422, -122.084] },
-  { name: "Microsoft", ticker: "MSFT", location: [47.6396, -122.1282] },
-  { name: "Amazon", ticker: "AMZN", location: [46.8509, -121.7606] },
-  { name: "Meta", ticker: "META", location: [37.4848, -122.1484] },
-  { name: "NVIDIA", ticker: "NVDA", location: [37.3861, -121.9645] },
-  { name: "JPMorgan", ticker: "JPM", location: [40.7578, -73.9712] },
-  { name: "Goldman Sachs", ticker: "GS", location: [40.7527, -73.9772] },
-  { name: "Boeing", ticker: "BA", location: [41.8818, -87.6352] },
-  { name: "SpaceX", ticker: "SPACE", location: [33.9202, -118.3291] },
-  { name: "Oracle", ticker: "ORCL", location: [37.5326, -122.2065] },
-  { name: "Yandex", ticker: "YNDX", location: [55.7558, 37.6173] },
-  { name: "Baidu", ticker: "BIDU", location: [39.9042, 116.4074] },
-  { name: "Tencent", ticker: "TCEHY", location: [22.5431, 114.0579] },
-  { name: "Alibaba", ticker: "BABA", location: [31.2304, 121.4737] },
-  { name: "Sony", ticker: "SONY", location: [35.6585, 139.7454] },
-  { name: "Samsung", ticker: "SSNLF", location: [37.3861, 127.1152] },
-  { name: "ASML", ticker: "ASML", location: [52.3546, 4.9039] },
-  { name: "BMW", ticker: "BMWYY", location: [48.1188, 11.6022] },
-  { name: "HSBC", ticker: "HSBC", location: [51.5074, -0.1278] },
-  { name: "Infosys", ticker: "INFY", location: [12.9716, 77.5946] },
-  { name: "Petrobras", ticker: "PBR", location: [-23.5505, -46.6333] },
-  { name: "BHP Group", ticker: "BHP", location: [-33.8688, 151.2093] },
-  { name: "Emirates NBD", ticker: "ENBD", location: [25.2048, 55.2708] },
-  { name: "Spotify", ticker: "SPOT", location: [59.3293, 18.0686] },
-  { name: "Shopify", ticker: "SHOP", location: [43.6532, -79.3832] },
+const THREATS: ThreatMarker[] = [
+  { name: "North America - Phishing", label: "PHISHING", location: [37.3349, -122.009] },
+  { name: "North America - ID Theft", label: "ID THEFT", location: [30.2218, -97.7737] },
+  { name: "North America - Ransomware", label: "RANSOMWARE", location: [37.422, -122.084] },
+  { name: "North America - Wire Fraud", label: "WIRE FRAUD", location: [47.6396, -122.1282] },
+  { name: "North America - Smishing", label: "SMISHING", location: [46.8509, -121.7606] },
+  { name: "North America - Vishing", label: "VISHING", location: [37.4848, -122.1484] },
+  { name: "North America - Data Breach", label: "DATA BREACH", location: [37.3861, -121.9645] },
+  { name: "East Coast - BEC", label: "BEC FRAUD", location: [40.7578, -73.9712] },
+  { name: "East Coast - Card Fraud", label: "CARD FRAUD", location: [40.7527, -73.9772] },
+  { name: "Midwest - Romance Scam", label: "ROMANCE SCAM", location: [41.8818, -87.6352] },
+  { name: "West Coast - Tech Support", label: "TECH SCAM", location: [33.9202, -118.3291] },
+  { name: "West Coast - Crypto Fraud", label: "CRYPTO FRAUD", location: [37.5326, -122.2065] },
+  { name: "Russia - APT", label: "APT GROUP", location: [55.7558, 37.6173] },
+  { name: "China - Espionage", label: "ESPIONAGE", location: [39.9042, 116.4074] },
+  { name: "SE Asia - Call Center", label: "CALL CENTER", location: [22.5431, 114.0579] },
+  { name: "Asia - Pig Butcher", label: "PIG BUTCHER", location: [31.2304, 121.4737] },
+  { name: "Japan - Credential", label: "CREDENTIAL", location: [35.6585, 139.7454] },
+  { name: "Korea - Deepfake", label: "DEEPFAKE", location: [37.3861, 127.1152] },
+  { name: "Europe - GDPR", label: "DATA SALE", location: [52.3546, 4.9039] },
+  { name: "Germany - Malware", label: "MALWARE", location: [48.1188, 11.6022] },
+  { name: "UK - Invoice Fraud", label: "INVOICE FRAUD", location: [51.5074, -0.1278] },
+  { name: "India - Support Scam", label: "SUPPORT SCAM", location: [12.9716, 77.5946] },
+  { name: "Brazil - Banking Trojan", label: "TROJAN", location: [-23.5505, -46.6333] },
+  { name: "Australia - SIM Swap", label: "SIM SWAP", location: [-33.8688, 151.2093] },
+  { name: "UAE - Impersonation", label: "IMPERSONATION", location: [25.2048, 55.2708] },
+  { name: "Sweden - Skimming", label: "SKIMMING", location: [59.3293, 18.0686] },
+  { name: "Canada - Phishing", label: "PHISHING", location: [43.6532, -79.3832] },
 ];
 
-// Show a rotating subset of tickers as floating labels
-const FEATURED_TICKERS = [
-  "AAPL", "TSLA", "GOOGL", "MSFT", "AMZN", "NVDA", "META", "JPM",
-  "SONY", "BABA", "ASML", "SHOP", "SPOT", "BHP", "HSBC", "INFY",
+const FEATURED_LABELS = [
+  "PHISHING", "ID THEFT", "RANSOMWARE", "WIRE FRAUD", "SMISHING", "DATA BREACH",
+  "BEC FRAUD", "CARD FRAUD", "ROMANCE SCAM", "CRYPTO FRAUD", "APT GROUP", "MALWARE",
+  "TROJAN", "SIM SWAP", "DEEPFAKE", "SUPPORT SCAM",
 ];
 
 export function Globe() {
@@ -69,7 +69,7 @@ export function Globe() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveLabels((prev) => {
-        return prev.map((idx) => (idx + 1) % FEATURED_TICKERS.length);
+        return prev.map((idx) => (idx + 1) % FEATURED_LABELS.length);
       });
     }, 3000);
     return () => clearInterval(interval);
@@ -78,7 +78,7 @@ export function Globe() {
   useEffect(() => {
     if (!canvasRef.current) return;
 
-    const markers = COMPANIES.map(({ location }) => ({
+    const markers = THREATS.map(({ location }) => ({
       location,
       size: 0.06,
     }));
@@ -94,8 +94,8 @@ export function Globe() {
       mapSamples: 20000,
       mapBrightness: 8,
       baseColor: [0.15, 0.15, 0.15],
-      markerColor: [0.34, 0.85, 0.49],
-      glowColor: [0.13, 0.55, 0.33],
+      markerColor: [0.85, 0.34, 0.34],
+      glowColor: [0.55, 0.13, 0.13],
       markers,
       onRender: (state) => {
         if (!pointerInteracting.current) {
@@ -122,20 +122,20 @@ export function Globe() {
 
   return (
     <div className="relative aspect-square w-full max-w-[600px] mx-auto">
-      {/* Emerald radial glow behind globe */}
-      <div className="absolute inset-0 rounded-full bg-blue-600/10 blur-3xl scale-75" />
-      
-      {/* Floating ticker labels */}
+      {/* Red radial glow behind globe */}
+      <div className="absolute inset-0 rounded-full bg-red-600/10 blur-3xl scale-75" />
+
+      {/* Floating threat labels */}
       <div className="absolute inset-0 pointer-events-none">
         {activeLabels.map((tickerIdx, i) => {
-          const ticker = FEATURED_TICKERS[tickerIdx];
+          const label = FEATURED_LABELS[tickerIdx];
           const angle = (i / activeLabels.length) * 360;
           const radius = 48;
           const x = 50 + radius * Math.cos((angle * Math.PI) / 180);
           const y = 50 + radius * Math.sin((angle * Math.PI) / 180);
           return (
             <div
-              key={`${ticker}-${i}`}
+              key={`${label}-${i}`}
               className="absolute transition-all duration-1000 ease-in-out"
               style={{
                 left: `${x}%`,
@@ -143,10 +143,10 @@ export function Globe() {
                 transform: "translate(-50%, -50%)",
               }}
             >
-              <div className="flex items-center gap-1.5 rounded-full border border-blue-600/30 bg-zinc-900/80 backdrop-blur-sm px-2.5 py-1 shadow-lg shadow-blue-600/10">
-                <span className="h-1.5 w-1.5 rounded-full bg-blue-600 animate-pulse" />
-                <span className="text-[10px] font-bold text-blue-500 tracking-wider">
-                  {ticker}
+              <div className="flex items-center gap-1.5 rounded-full border border-red-500/30 bg-zinc-900/80 backdrop-blur-sm px-2.5 py-1 shadow-lg shadow-red-600/10">
+                <span className="h-1.5 w-1.5 rounded-full bg-red-500 live-indicator" />
+                <span className="text-[10px] font-bold text-red-400 tracking-wider font-data">
+                  {label}
                 </span>
               </div>
             </div>

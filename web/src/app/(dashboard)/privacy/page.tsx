@@ -266,7 +266,7 @@ export default function PrivacyAutopilotPage() {
           <div>
             <div className="flex items-center gap-2">
               <UserX className="h-5 w-5 text-blue-500" />
-              <h1 className="text-2xl font-bold text-white">Privacy Autopilot</h1>
+              <h1 className="text-2xl font-bold text-white tracking-wider">DATA BROKER SURVEILLANCE</h1>
             </div>
             <p className="mt-1 text-sm text-zinc-400">
               Track and manage opt-out requests across data brokers to keep your personal information private.

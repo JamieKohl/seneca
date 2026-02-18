@@ -185,8 +185,8 @@ export default function SubscriptionHunterPage() {
               <CreditCard className="h-5 w-5 text-blue-500" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-white">
-                Subscription Hunter
+              <h1 className="text-2xl font-bold text-white tracking-wider">
+                FINANCIAL DRAIN MONITOR
               </h1>
               <p className="text-sm text-zinc-400">
                 Monthly spend:{" "}

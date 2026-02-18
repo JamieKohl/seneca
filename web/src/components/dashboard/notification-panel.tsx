@@ -48,6 +48,27 @@ const typeConfig: Record<
   },
 };
 
+const severityLabels = ["CRITICAL", "HIGH", "MEDIUM", "LOW", "INFO"];
+
+function getIncidentId(index: number): string {
+  return `INC-${new Date().getFullYear()}-${String(1000 + index).padStart(4, "0")}`;
+}
+
+function getSeverityBadge(type: string): { label: string; color: string } {
+  switch (type) {
+    case "scam":
+      return { label: "CRITICAL", color: "bg-red-500/10 text-red-400 border-red-500/20" };
+    case "subscription":
+      return { label: "HIGH", color: "bg-amber-500/10 text-amber-400 border-amber-500/20" };
+    case "privacy":
+      return { label: "HIGH", color: "bg-purple-500/10 text-purple-400 border-purple-500/20" };
+    case "price":
+      return { label: "MEDIUM", color: "bg-blue-500/10 text-blue-400 border-blue-500/20" };
+    default:
+      return { label: "INFO", color: "bg-zinc-500/10 text-zinc-400 border-zinc-500/20" };
+  }
+}
+
 interface NotificationPanelProps {
   onClose: () => void;
 }
@@ -67,10 +88,10 @@ export function NotificationPanel({ onClose }: NotificationPanelProps) {
       {/* Header */}
       <div className="flex items-center justify-between border-b border-zinc-800 px-4 py-3">
         <div className="flex items-center gap-2">
-          <Bell className="h-4 w-4 text-blue-600" />
-          <h3 className="text-sm font-semibold text-white">Notifications</h3>
+          <Bell className="h-4 w-4 text-red-500" />
+          <h3 className="text-sm font-bold text-white uppercase tracking-wider">Incident Alerts</h3>
           {unreadCount > 0 && (
-            <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-blue-700 px-1.5 text-[10px] font-bold text-white">
+            <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-red-700 px-1.5 text-[10px] font-bold text-white">
               {unreadCount}
             </span>
           )}
@@ -80,10 +101,10 @@ export function NotificationPanel({ onClose }: NotificationPanelProps) {
             <button
               onClick={markAllNotificationsRead}
               className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors"
-              title="Mark all as read"
+              title="Acknowledge all"
             >
               <CheckCheck className="h-3.5 w-3.5" />
-              Read all
+              Acknowledge All
             </button>
           )}
           <button
@@ -100,28 +121,30 @@ export function NotificationPanel({ onClose }: NotificationPanelProps) {
         {notifications.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-zinc-500">
             <BellOff className="h-10 w-10 mb-3 text-zinc-700" />
-            <p className="text-sm font-medium">No notifications</p>
+            <p className="text-sm font-medium">No incidents</p>
             <p className="text-xs mt-1">
-              Alerts will appear here when triggered
+              Incident alerts will appear here when detected
             </p>
           </div>
         ) : (
-          notifications.map((notification) => {
+          notifications.map((notification, index) => {
             const config = typeConfig[notification.type];
             const Icon = config.icon;
+            const severity = getSeverityBadge(notification.type);
+            const incidentId = getIncidentId(index);
 
             const content = (
               <div
                 className={cn(
                   "group relative flex gap-3 px-4 py-3 transition-colors",
                   !notification.read
-                    ? "bg-blue-600/[0.03] hover:bg-zinc-900/80"
+                    ? "bg-red-600/[0.03] hover:bg-zinc-900/80"
                     : "hover:bg-zinc-900/50"
                 )}
               >
                 {/* Unread dot */}
                 {!notification.read && (
-                  <div className="absolute left-1.5 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-blue-600" />
+                  <div className="absolute left-1.5 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-red-500" />
                 )}
 
                 {/* Icon */}
@@ -137,14 +160,19 @@ export function NotificationPanel({ onClose }: NotificationPanelProps) {
                 {/* Content */}
                 <div className="min-w-0 flex-1">
                   <div className="flex items-start justify-between gap-2">
-                    <p
-                      className={cn(
-                        "text-sm font-medium leading-snug",
-                        !notification.read ? "text-white" : "text-zinc-300"
-                      )}
-                    >
-                      {notification.title}
-                    </p>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-[9px] font-bold text-zinc-600 font-data">
+                        {incidentId}
+                      </span>
+                      <span
+                        className={cn(
+                          "rounded border px-1.5 py-0.5 text-[9px] font-bold uppercase",
+                          severity.color
+                        )}
+                      >
+                        {severity.label}
+                      </span>
+                    </div>
                     {/* Dismiss button */}
                     <button
                       onClick={(e) => {
@@ -157,11 +185,19 @@ export function NotificationPanel({ onClose }: NotificationPanelProps) {
                       <X className="h-3 w-3" />
                     </button>
                   </div>
+                  <p
+                    className={cn(
+                      "text-sm font-medium leading-snug mt-1",
+                      !notification.read ? "text-white" : "text-zinc-300"
+                    )}
+                  >
+                    {notification.title}
+                  </p>
                   <p className="mt-0.5 text-xs text-zinc-500 leading-relaxed line-clamp-2">
                     {notification.body}
                   </p>
                   <div className="mt-1.5 flex items-center gap-2">
-                    <span className="text-[10px] text-zinc-600">
+                    <span className="text-[10px] text-zinc-600 font-data">
                       {timeAgo(notification.createdAt)}
                     </span>
                     {notification.actionUrl && (
@@ -212,7 +248,7 @@ export function NotificationPanel({ onClose }: NotificationPanelProps) {
             onClick={onClose}
             className="flex items-center justify-center gap-1.5 text-xs font-medium text-blue-600 hover:text-blue-500 transition-colors"
           >
-            View All Alert History
+            View Full Incident Log
             <ExternalLink className="h-3 w-3" />
           </Link>
         </div>

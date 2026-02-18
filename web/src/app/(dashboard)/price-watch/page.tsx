@@ -183,7 +183,7 @@ export default function PriceWatchPage() {
               <Search className="h-5 w-5 text-blue-500" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-white">Price Watch</h1>
+              <h1 className="text-2xl font-bold text-white tracking-wider">PRICE MANIPULATION MONITOR</h1>
               <p className="text-sm text-zinc-400">
                 Monitor products for price discrimination
               </p>

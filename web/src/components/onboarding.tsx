@@ -13,30 +13,30 @@ import {
 const steps = [
   {
     icon: Shield,
-    title: "Welcome to Kohlcorp Shield",
+    title: "Welcome to Shield Intelligence Center",
     description:
-      "Your AI-powered consumer protection platform. We fight scams, track subscriptions, protect your privacy, and catch price discrimination — automatically.",
+      "Your automated threat intelligence platform. Shield detects fraud, monitors financial drains, surveils data brokers, and intercepts price manipulation — in real time.",
     color: "text-blue-500 bg-blue-600/10",
   },
   {
     icon: ShieldAlert,
-    title: "Scam Firewall",
+    title: "Fraud Detection Module",
     description:
-      "Paste any suspicious text, email, or call transcript and our AI will instantly analyze it for red flags and tell you if it's a scam.",
+      "Submit any suspicious text, email, or call transcript for AI-powered threat analysis. Shield identifies red flags and assigns risk scores to neutralize scam attempts.",
     color: "text-red-400 bg-red-500/10",
   },
   {
     icon: CreditCard,
-    title: "Track Your Subscriptions",
+    title: "Financial Monitoring Module",
     description:
-      "Add your subscriptions so Shield can flag unused ones and help you save money. The average person wastes $133/month on forgotten subscriptions.",
+      "Track active subscriptions so Shield can flag unused drains on your finances. The average consumer loses $133/month to forgotten recurring charges.",
     color: "text-amber-400 bg-amber-500/10",
   },
   {
     icon: Bell,
-    title: "Get Protected",
+    title: "Threat Monitoring Active",
     description:
-      "Shield monitors threats 24/7 and sends you alerts when action is needed. You'll also see your protection score on the dashboard.",
+      "Shield monitors all defense layers 24/7 and dispatches incident alerts when action is required. Your readiness score is displayed on the Threat Overview dashboard.",
     color: "text-blue-400 bg-blue-500/10",
   },
 ];
@@ -108,7 +108,7 @@ export function OnboardingFlow() {
             {isLastStep ? (
               <>
                 <Sparkles className="h-4 w-4" />
-                Get Protected
+                Activate Monitoring
               </>
             ) : (
               <>

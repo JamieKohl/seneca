@@ -21,29 +21,29 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 const quickActions = [
   {
-    label: "Analyze Scam",
-    description: "Check a suspicious message",
+    label: "Submit Threat Report",
+    description: "Analyze suspicious message",
     href: "/scams",
     icon: ShieldAlert,
     color: "text-red-400 bg-red-500/10",
   },
   {
-    label: "Subscriptions",
-    description: "Track your spending",
+    label: "Financial Audit",
+    description: "Review spending drains",
     href: "/subscriptions",
     icon: CreditCard,
     color: "text-amber-400 bg-amber-500/10",
   },
   {
-    label: "Privacy Scan",
-    description: "Check data brokers",
+    label: "Data Exposure Check",
+    description: "Scan broker registries",
     href: "/privacy",
     icon: UserX,
     color: "text-purple-400 bg-purple-500/10",
   },
   {
-    label: "Price Watch",
-    description: "Monitor for price tricks",
+    label: "Price Intelligence",
+    description: "Detect manipulation",
     href: "/price-watch",
     icon: Search,
     color: "text-blue-400 bg-blue-500/10",
@@ -82,16 +82,20 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      {/* Welcome Banner */}
-      <div className="relative overflow-hidden rounded-xl border border-zinc-800 bg-gradient-to-r from-blue-600/10 via-zinc-900/50 to-zinc-900/50 p-6">
-        <div className="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-blue-600/5 to-transparent" />
+      {/* Situation Report Banner */}
+      <div className="relative overflow-hidden rounded-xl border border-zinc-800 bg-gradient-to-r from-red-600/10 via-zinc-900/50 to-zinc-900/50 p-6">
+        <div className="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-red-600/5 to-transparent" />
         <div className="relative flex items-center justify-between">
           <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-red-400">SITUATION REPORT</span>
+              <span className="h-2 w-2 rounded-full bg-red-500 live-indicator" />
+            </div>
             <h1 className="text-2xl font-bold text-white">
-              Shield Dashboard
+              Threat Overview
             </h1>
             <p className="mt-1 text-sm text-zinc-400">
-              Your AI protection is active and monitoring threats 24/7
+              Automated threat monitoring active across all defense layers
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -100,9 +104,9 @@ export default function DashboardPage() {
               {isLoading ? (
                 <div className="h-8 w-10 animate-pulse rounded bg-zinc-800" />
               ) : (
-                <p className="text-2xl font-bold text-blue-600">{protectionScore}</p>
+                <p className="text-2xl font-bold text-blue-600 font-data">{protectionScore}</p>
               )}
-              <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Protection Score</p>
+              <p className="text-[10px] text-zinc-500 uppercase tracking-[0.15em]">Readiness Score</p>
             </div>
           </div>
         </div>
@@ -142,16 +146,16 @@ export default function DashboardPage() {
         ) : (
           <>
             <StatCard
-              title="Scams Blocked"
+              title="Threats Intercepted"
               value={`${scamsBlocked}`}
               description="Threats caught this month"
               icon={ShieldAlert}
               iconColor="text-red-500 bg-red-500/10"
             />
             <StatCard
-              title="Money Saved"
+              title="Financial Impact Prevented"
               value={`$${moneySaved.toFixed(2)}`}
-              description="From cancelled subscriptions"
+              description="From neutralized threats"
               icon={DollarSign}
               iconColor="text-blue-600 bg-blue-600/10"
             />
@@ -178,7 +182,7 @@ export default function DashboardPage() {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <Shield className="h-5 w-5 text-blue-600" />
-            <h3 className="text-base font-semibold text-white">Protection Score Breakdown</h3>
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider">DEFENSE LAYER STATUS</h3>
           </div>
           {isLoading ? (
             <div className="h-5 w-12 animate-pulse rounded bg-zinc-800" />
@@ -199,15 +203,15 @@ export default function DashboardPage() {
             ))
           ) : (
             [
-              { label: "Scam Protection", score: 90, color: "bg-red-500" },
-              { label: "Subscription Tracking", score: 75, color: "bg-amber-500" },
-              { label: "Privacy Shield", score: 60, color: "bg-purple-500" },
-              { label: "Price Monitoring", score: 85, color: "bg-blue-500" },
+              { label: "Fraud Detection", score: 90, color: "bg-red-500", status: "OPERATIONAL" },
+              { label: "Financial Monitoring", score: 75, color: "bg-amber-500", status: "OPERATIONAL" },
+              { label: "Data Surveillance", score: 60, color: "bg-purple-500", status: "OPERATIONAL" },
+              { label: "Price Intelligence", score: 85, color: "bg-blue-500", status: "OPERATIONAL" },
             ].map((item) => (
               <div key={item.label}>
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-sm text-zinc-400">{item.label}</span>
-                  <span className="text-xs font-medium text-zinc-500">{item.score}%</span>
+                  <span className="text-[10px] font-bold text-green-400 font-data">{item.status}</span>
                 </div>
                 <div className="h-2 rounded-full bg-zinc-800">
                   <div
@@ -225,8 +229,8 @@ export default function DashboardPage() {
       <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
-            <Bell className="h-5 w-5 text-blue-600" />
-            <h3 className="text-base font-semibold text-white">Recent Alerts</h3>
+            <Bell className="h-5 w-5 text-red-500" />
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider">LATEST INCIDENTS</h3>
             {unreadCount > 0 && (
               <span className="rounded-full bg-blue-600/10 px-2 py-0.5 text-xs font-medium text-blue-500">
                 {unreadCount} new

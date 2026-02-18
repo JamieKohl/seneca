@@ -6,10 +6,10 @@ import { useRouter } from "next/navigation";
 import { Shield, UserPlus, Eye, EyeOff, ArrowRight, Check } from "lucide-react";
 
 const features = [
-  "AI-powered scam detection",
-  "Subscription tracking & savings",
-  "Data broker opt-out monitoring",
-  "Free forever — upgrade when ready",
+  "Real-time fraud interception",
+  "Financial drain detection ($133/mo avg. waste)",
+  "190+ data broker surveillance",
+  "Zero-cost tier available",
 ];
 
 export default function RegisterPage() {
@@ -58,16 +58,18 @@ export default function RegisterPage() {
         <div className="text-center">
           <Link href="/" className="inline-flex items-center justify-center gap-2 group">
             <Shield className="h-10 w-10 text-blue-600 group-hover:rotate-45 transition-transform duration-500" />
-            <span className="text-2xl font-bold text-white">KohlCorp Shield</span>
+            <span className="text-2xl font-bold text-white tracking-tight">
+              KOHLCORP <span className="text-blue-500">SHIELD</span>
+            </span>
           </Link>
-          <p className="mt-2 text-sm text-zinc-400">
-            Start protecting your money and privacy in under 60 seconds
+          <p className="mt-2 text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">
+            Start monitoring threats in under 60 seconds
           </p>
         </div>
 
         {/* Form */}
-        <div className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-8">
-          <h2 className="mb-2 text-xl font-bold text-white">Create your account</h2>
+        <div className="rounded-xl border border-zinc-800 border-t-red-500/50 bg-zinc-900/80 backdrop-blur-sm p-8">
+          <h2 className="mb-2 text-xl font-bold text-white">Create Secure Account</h2>
           <div className="mb-6 flex flex-wrap gap-x-4 gap-y-1">
             {features.map((f) => (
               <span key={f} className="flex items-center gap-1 text-[10px] text-zinc-500">
@@ -142,7 +144,7 @@ export default function RegisterPage() {
               ) : (
                 <>
                   <UserPlus className="h-4 w-4" />
-                  Create Account
+                  Create Secure Account
                 </>
               )}
             </button>

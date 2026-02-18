@@ -1,48 +1,47 @@
 "use client";
 
 const alerts = [
-  { type: "Scam", severity: "HIGH", reason: "Phishing email blocked — fake PayPal password reset" },
-  { type: "Subscription", severity: "SAVE", reason: "Unused Hulu subscription — save $17.99/mo" },
-  { type: "Privacy", severity: "WARN", reason: "Spokeo re-listed your data — opt-out again" },
-  { type: "Price", severity: "FLAG", reason: "Flight $120 higher than incognito price" },
-  { type: "Scam", severity: "HIGH", reason: "IRS impersonation call detected — auto-blocked" },
-  { type: "Subscription", severity: "SAVE", reason: "3 free trials expiring this week — cancel now" },
-  { type: "Privacy", severity: "DONE", reason: "BeenVerified opt-out confirmed" },
-  { type: "Scam", severity: "MED", reason: "Suspicious Amazon order text — likely smishing" },
+  { time: "14:32 EST", headline: "FTC reports 2.6M fraud complaints filed in latest period" },
+  { time: "13:47 EST", headline: "Phishing attacks targeting bank customers up 34% this quarter" },
+  { time: "12:15 EST", headline: "New data broker registry exposes 12M consumer records" },
+  { time: "11:58 EST", headline: "FBI IC3 warns of surge in cryptocurrency investment fraud" },
+  { time: "11:23 EST", headline: "Average consumer loses $133/mo to unused subscriptions" },
+  { time: "10:41 EST", headline: "Identity theft complaints reach all-time high in 2024" },
+  { time: "09:55 EST", headline: "Price discrimination detected across major e-commerce platforms" },
+  { time: "09:12 EST", headline: "Romance scam losses exceed $1.3B annually, FTC reports" },
 ];
-
-const severityStyles: Record<string, string> = {
-  HIGH: "text-red-400 bg-red-500/10 border-red-500/20",
-  MED: "text-yellow-400 bg-yellow-500/10 border-yellow-500/20",
-  SAVE: "text-blue-500 bg-blue-600/10 border-blue-600/20",
-  WARN: "text-amber-400 bg-amber-500/10 border-amber-500/20",
-  FLAG: "text-purple-400 bg-purple-500/10 border-purple-500/20",
-  DONE: "text-green-400 bg-green-500/10 border-green-500/20",
-};
 
 export function AlertTicker() {
   const doubled = [...alerts, ...alerts];
 
   return (
-    <div className="relative overflow-hidden border-y border-zinc-800 bg-zinc-900/30 py-4">
+    <div className="relative overflow-hidden border-y border-zinc-800 bg-zinc-900/30 py-3">
       <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-zinc-950 to-transparent" />
       <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-zinc-950 to-transparent" />
 
-      <div className="flex animate-[scroll_30s_linear_infinite] gap-6 whitespace-nowrap">
+      {/* LIVE label */}
+      <div className="absolute left-0 top-0 z-20 h-full flex items-center pl-4">
+        <div className="flex items-center gap-2 rounded bg-red-600 px-3 py-1 shadow-lg shadow-red-600/20">
+          <span className="h-2 w-2 rounded-full bg-white live-indicator" />
+          <span className="text-[10px] font-black uppercase tracking-widest text-white">
+            LIVE THREAT FEED
+          </span>
+        </div>
+      </div>
+
+      <div className="flex animate-[scroll_40s_linear_infinite] gap-8 whitespace-nowrap pl-48">
         {doubled.map((alert, i) => (
           <div
-            key={`${alert.type}-${i}`}
-            className="flex shrink-0 items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-900/80 px-4 py-2"
+            key={`alert-${i}`}
+            className="flex shrink-0 items-center gap-3"
           >
-            <span className="text-sm font-bold text-white">{alert.type}</span>
-            <span
-              className={`rounded-md border px-2 py-0.5 text-xs font-bold ${
-                severityStyles[alert.severity]
-              }`}
-            >
-              {alert.severity}
+            <span className="text-[10px] font-bold text-red-400/70 font-data">
+              [{alert.time}]
             </span>
-            <span className="text-xs text-zinc-400">{alert.reason}</span>
+            <span className="text-xs text-zinc-300 font-medium">
+              {alert.headline}
+            </span>
+            <span className="text-zinc-700">|</span>
           </div>
         ))}
       </div>

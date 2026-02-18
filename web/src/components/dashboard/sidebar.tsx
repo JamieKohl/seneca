@@ -21,12 +21,12 @@ import { useStore } from "@/lib/store";
 
 const navItems = [
   { href: "/", label: "Home", icon: Home },
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/scams", label: "Scam Firewall", icon: ShieldAlert },
-  { href: "/subscriptions", label: "Subscriptions", icon: CreditCard },
-  { href: "/privacy", label: "Privacy", icon: UserX },
-  { href: "/price-watch", label: "Price Watch", icon: Search },
-  { href: "/alerts", label: "Alerts", icon: Bell },
+  { href: "/dashboard", label: "Threat Overview", icon: LayoutDashboard },
+  { href: "/scams", label: "Fraud Detection", icon: ShieldAlert },
+  { href: "/subscriptions", label: "Financial Monitor", icon: CreditCard },
+  { href: "/privacy", label: "Data Surveillance", icon: UserX },
+  { href: "/price-watch", label: "Price Intel", icon: Search },
+  { href: "/alerts", label: "Incident Log", icon: Bell },
   { href: "/settings", label: "Settings", icon: Settings },
 ];
 
@@ -55,9 +55,14 @@ export function Sidebar() {
         <div className="flex h-16 items-center border-b border-zinc-800 px-4">
           <Shield className="h-8 w-8 shrink-0 text-blue-600" />
           {sidebarOpen && (
-            <span className="ml-3 text-lg font-bold text-white">
-              KohlCorp Shield
-            </span>
+            <div className="ml-3">
+              <span className="text-lg font-bold text-white tracking-tight block leading-tight">
+                KOHLCORP <span className="text-blue-500">SHIELD</span>
+              </span>
+              <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-zinc-600">
+                INTELLIGENCE CENTER
+              </span>
+            </div>
           )}
         </div>
 
@@ -73,7 +78,7 @@ export function Sidebar() {
                 className={cn(
                   "flex items-center rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                   isActive
-                    ? "bg-blue-600/10 text-blue-600"
+                    ? "border-l-2 border-blue-600 bg-blue-600/5 text-blue-500 ml-0 pl-2.5"
                     : "text-zinc-400 hover:bg-zinc-800 hover:text-white"
                 )}
               >
@@ -95,7 +100,7 @@ export function Sidebar() {
                 <Crown className="h-4 w-4 text-blue-500" />
               </div>
               <div className="min-w-0">
-                <p className="text-xs font-semibold text-white">Upgrade to Solo</p>
+                <p className="text-xs font-semibold text-white">Expand Coverage</p>
                 <p className="text-[10px] text-zinc-500">Full protection for $9.99/mo</p>
               </div>
             </Link>
@@ -105,7 +110,7 @@ export function Sidebar() {
           <div className="mx-3 mb-3">
             <Link
               href="/checkout"
-              title="Upgrade to Solo"
+              title="Expand Coverage"
               className="flex items-center justify-center rounded-lg bg-blue-600/10 p-2.5 text-blue-500 hover:bg-blue-600/20 transition-colors"
             >
               <Crown className="h-5 w-5" />

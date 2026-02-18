@@ -131,7 +131,7 @@ export default function ScamFirewallPage() {
         <div className="relative">
           <div className="flex items-center gap-2">
             <ShieldAlert className="h-5 w-5 text-red-400" />
-            <h1 className="text-2xl font-bold text-white">Scam Firewall</h1>
+            <h1 className="text-2xl font-bold text-white">FRAUD DETECTION & ANALYSIS</h1>
           </div>
           <p className="mt-1 text-sm text-zinc-400">
             Submit suspicious messages, calls, or emails for AI-powered scam

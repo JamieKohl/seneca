@@ -71,7 +71,7 @@ export default function AlertsPage() {
           <div>
             <div className="flex items-center gap-2">
               <Bell className="h-5 w-5 text-amber-400" />
-              <h1 className="text-2xl font-bold text-white">Alerts</h1>
+              <h1 className="text-2xl font-bold text-white">INCIDENT LOG</h1>
               {unreadCount > 0 && (
                 <span className="rounded-full bg-blue-600/10 px-2 py-0.5 text-xs font-medium text-blue-500">
                   {unreadCount} unread
@@ -79,12 +79,12 @@ export default function AlertsPage() {
               )}
             </div>
             <p className="mt-1 text-sm text-zinc-400">
-              All Shield alerts and notifications in one place
+              All recorded incidents and threat notifications
             </p>
           </div>
           <div className="text-right">
             <p className="text-2xl font-bold text-white">{alerts.length}</p>
-            <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Total Alerts</p>
+            <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Total Incidents</p>
           </div>
         </div>
       </div>
@@ -108,11 +108,11 @@ export default function AlertsPage() {
       {/* Filters */}
       <div className="flex items-center gap-1 rounded-xl border border-zinc-800 bg-zinc-900/30 p-1 w-fit">
         {[
-          { key: "all", label: "All" },
-          { key: "scam", label: "Scam" },
-          { key: "subscription", label: "Subscription" },
+          { key: "all", label: "All Incidents" },
+          { key: "scam", label: "Fraud" },
+          { key: "subscription", label: "Financial" },
           { key: "privacy", label: "Privacy" },
-          { key: "price", label: "Price" },
+          { key: "price", label: "Pricing" },
         ].map((f) => (
           <button
             key={f.key}

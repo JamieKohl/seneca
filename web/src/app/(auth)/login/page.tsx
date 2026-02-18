@@ -49,16 +49,25 @@ export default function LoginPage() {
         <div className="text-center">
           <Link href="/" className="inline-flex items-center justify-center gap-2 group">
             <Shield className="h-10 w-10 text-blue-600 group-hover:rotate-45 transition-transform duration-500" />
-            <span className="text-2xl font-bold text-white">KohlCorp Shield</span>
+            <span className="text-2xl font-bold text-white tracking-tight">
+              KOHLCORP <span className="text-blue-500">SHIELD</span>
+            </span>
           </Link>
-          <p className="mt-2 text-sm text-zinc-400">
-            AI-powered consumer protection
+          <p className="mt-2 text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">
+            Consumer Threat Intelligence Platform
+          </p>
+          <p className="mt-2 text-xs text-red-400 font-data">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-red-500 live-indicator mr-1.5 align-middle" />
+            Monitoring 2.6M+ fraud reports in real-time
           </p>
         </div>
 
         {/* Form */}
-        <div className="rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm p-8">
-          <h2 className="mb-6 text-xl font-bold text-white">Welcome back</h2>
+        <div className="rounded-xl border border-zinc-800 border-t-red-500/50 bg-zinc-900/80 backdrop-blur-sm p-8">
+          <div className="flex items-center gap-2 mb-6">
+            <h2 className="text-xl font-bold text-white">Access Secure Dashboard</h2>
+            <span className="h-2 w-2 rounded-full bg-red-500 live-indicator" />
+          </div>
 
           {error && (
             <div className="mb-4 rounded-lg bg-red-500/10 border border-red-500/20 px-4 py-3 text-sm text-red-400">
@@ -112,7 +121,7 @@ export default function LoginPage() {
               ) : (
                 <>
                   <LogIn className="h-4 w-4" />
-                  Sign In
+                  Access Dashboard
                 </>
               )}
             </button>
@@ -128,7 +137,7 @@ export default function LoginPage() {
             href="/register"
             className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-700 px-4 py-2.5 text-sm font-medium text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors"
           >
-            Create an account
+            Create secure account
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

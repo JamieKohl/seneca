@@ -3,35 +3,35 @@ import { Check } from "lucide-react";
 
 const plans = [
   {
-    name: "Solo",
+    name: "INDIVIDUAL COVERAGE",
     price: "$9.99",
     period: "/month",
-    description: "Complete protection for one person",
+    description: "Complete threat protection for one individual",
     features: [
-      "Unlimited scam analysis",
-      "Subscription tracking & alerts",
-      "Data broker opt-out for 1 person",
-      "Price discrimination monitoring",
-      "Email & push alerts",
-      "Alert history & reports",
+      "Unlimited fraud analysis & interception",
+      "Financial drain monitoring & alerts",
+      "Data broker surveillance for 1 identity",
+      "Price discrimination detection",
+      "Real-time incident alerts",
+      "Full incident report history",
     ],
-    cta: "Start Free Trial",
+    cta: "Activate Coverage",
     highlighted: true,
   },
   {
-    name: "Family",
+    name: "HOUSEHOLD COVERAGE",
     price: "$19.99",
     period: "/month",
-    description: "Protect your whole household",
+    description: "Extend protection to your entire household",
     features: [
-      "Everything in Solo",
-      "Up to 5 family members",
-      "Family scam dashboard",
-      "Shared subscription tracking",
+      "Everything in Individual Coverage",
+      "Up to 5 protected identities",
+      "Household threat dashboard",
+      "Shared financial monitoring",
       "Priority data broker removal",
-      "Dedicated support",
+      "Dedicated support channel",
     ],
-    cta: "Start Family Trial",
+    cta: "Activate Coverage",
     highlighted: false,
   },
 ];
@@ -41,8 +41,11 @@ export function PricingSection() {
     <section id="pricing" className="py-24 scroll-mt-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-500 mb-2">
+            COVERAGE OPTIONS
+          </p>
           <h2 className="text-3xl font-bold text-white sm:text-4xl">
-            Simple, Transparent Pricing
+            PROTECTION COVERAGE LEVELS
           </h2>
           <p className="mt-4 text-lg text-zinc-400">
             14-day free trial. Cancel anytime. No hidden fees.
@@ -60,13 +63,13 @@ export function PricingSection() {
               }`}
             >
               {plan.highlighted && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-blue-700 px-4 py-1 text-xs font-bold text-white">
-                  Most Popular
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-blue-700 px-4 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
+                  RECOMMENDED
                 </div>
               )}
-              <h3 className="text-lg font-semibold text-white">{plan.name}</h3>
+              <h3 className="text-sm font-bold text-white tracking-wider">{plan.name}</h3>
               <div className="mt-4 flex items-baseline gap-1">
-                <span className="text-4xl font-bold text-white">
+                <span className="text-4xl font-bold text-white font-data">
                   {plan.price}
                 </span>
                 <span className="text-sm text-zinc-400">{plan.period}</span>
@@ -95,6 +98,10 @@ export function PricingSection() {
             </div>
           ))}
         </div>
+
+        <p className="mt-8 text-center text-xs text-zinc-500 font-data">
+          Average user saves $127/month. Coverage pays for itself in 2.4 days.
+        </p>
       </div>
     </section>
   );
